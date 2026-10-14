@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SessionWrapper from "@/components/SessionWrapper";
+import Navbar from "@/components/Navbar";
+import localFont from "next/font/local";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +13,37 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// CUSTOM FONTS
+export const solo = localFont({
+  src: "../fonts/SololevelingFont.ttf",
+  variable: "--font-solo", // exposes as CSS var
+});
+
+export const vegawanty = localFont({
+  src: "../fonts/vegawanty/Vegawanty.ttf",
+  variable: "--font-vega", // exposes as CSS var
+});
+
+export const maghfirea = localFont({
+  src: "../fonts/maghfirea/Maghfirea.ttf",
+  variable: "--font-mag", // exposes as CSS var
+});
+
+export const satoshi = localFont({
+  src: "../fonts/Satoshi_Complete/TTF/Satoshi-Variable.ttf",
+  variable: "--font-sato", // exposes as CSS var
+});
+
+export const wulkan = localFont({
+  src: "../fonts/wulkan-display/WulkanDisplayBlack.woff2",
+  variable: "--font-wul", // exposes as CSS var
+});
+
+export const aeonik = localFont({
+  src: "../fonts/Aeonik/Aeonik-Regular.ttf",
+  variable: "--font-aeo", // exposes as CSS var
 });
 
 export const metadata: Metadata = {
@@ -25,9 +59,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${solo.variable} ${vegawanty.variable} ${maghfirea.variable} ${satoshi.variable} ${wulkan.variable} ${aeonik.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SessionWrapper>
+          <Navbar />
+          {children}
+        </SessionWrapper>
+      </body>
     </html>
   );
 }
