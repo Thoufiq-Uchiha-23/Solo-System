@@ -10,6 +10,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* CUSTOM ADDED FONTS */
+  --font-solo: var(--font-solo);
+  --font-vega: var(--font-vega);
+  --font-mag: var(--font-mag);
+  --font-sato: var(--font-sato);
+  --font-wul: var(--font-wul);
+  --font-aeo: var(--font-aeo);
 }
 
 @media (prefers-color-scheme: dark) {
