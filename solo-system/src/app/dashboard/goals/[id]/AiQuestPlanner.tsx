@@ -8,12 +8,13 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   const [error, setError] = useState("");
   const [pending, startTransition] = useTransition();
 
-    function generate() {
+  function generate() {
     setError("");
     startTransition(async () => {
       try {
         const res = await generateQuestDraft(goalId);
-        if (res.error || !res.quests) setError(res.error ?? "Something went wrong");
+        if (res.error || !res.quests)
+          setError(res.error ?? "Something went wrong");
         else setDraft(res.quests);
       } catch {
         setError("Something went wrong. Please try again.");
@@ -31,7 +32,9 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   }
 
   const update = (i: number, patch: Partial<DraftQuest>) =>
-    setDraft((d) => d && d.map((q, idx) => (idx === i ? { ...q, ...patch } : q)));
+    setDraft(
+      (d) => d && d.map((q, idx) => (idx === i ? { ...q, ...patch } : q)),
+    );
 
   const remove = (i: number) =>
     setDraft((d) => d && d.filter((_, idx) => idx !== i));
@@ -57,6 +60,21 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
         >
           {pending ? "Generating..." : "✨ Generate quests with AI"}
         </button>
+
+        {pending && (
+          <div className="space-y-3 mt-4">
+            <p className="text-slate-500 text-sm">
+              Planning your quests, this can take a few seconds...
+            </p>
+            {[0, 1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="bg-slate-800 rounded-lg h-24 animate-pulse"
+              />
+            ))}
+          </div>
+        )}
+
         {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
     );
@@ -65,7 +83,8 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   return (
     <div className="bg-slate-900 rounded-lg p-4 mb-8 font-aeo">
       <p className="text-slate-400 text-sm mb-4">
-        Edit anything you want, then save. Nothing is added until you press Save.
+        Edit anything you want, then save. Nothing is added until you press
+        Save.
       </p>
 
       <div className="space-y-3">
@@ -88,7 +107,9 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
               <select
                 value={q.difficulty}
                 onChange={(e) =>
-                  update(i, { difficulty: e.target.value as DraftQuest["difficulty"] })
+                  update(i, {
+                    difficulty: e.target.value as DraftQuest["difficulty"],
+                  })
                 }
                 className="bg-slate-700 rounded-xl px-2 py-1 text-white"
               >
@@ -96,9 +117,24 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
                 <option value="medium">Medium · 15 XP</option>
                 <option value="hard">Hard · 25 XP</option>
               </select>
-              <button onClick={() => move(i, -1)} className="px-2 text-slate-400">↑</button>
-              <button onClick={() => move(i, 1)} className="px-2 text-slate-400">↓</button>
-              <button onClick={() => remove(i)} className="ml-auto text-red-400">Delete</button>
+              <button
+                onClick={() => move(i, -1)}
+                className="px-2 text-slate-400"
+              >
+                ↑
+              </button>
+              <button
+                onClick={() => move(i, 1)}
+                className="px-2 text-slate-400"
+              >
+                ↓
+              </button>
+              <button
+                onClick={() => remove(i)}
+                className="ml-auto text-red-400"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
@@ -107,7 +143,9 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
       {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
 
       <div className="flex gap-2 mt-4">
-        <button onClick={add} className="text-slate-300 px-3 py-2">+ Add quest</button>
+        <button onClick={add} className="text-slate-300 px-3 py-2">
+          + Add quest
+        </button>
         <button
           onClick={() => setDraft(null)}
           className="text-slate-400 px-3 py-2 ml-auto"
