@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { generatePlan } from "@/lib/ai";
 import { searchVideos } from "@/lib/youtube";
+import { auth } from "@/lib/auth";
 
 type Difficulty = "easy" | "medium" | "hard";
 export type DraftQuest = {
@@ -21,8 +22,11 @@ const XP_BY_DIFFICULTY: Record<Difficulty, number> = {
 export async function generateQuestDraft(
   goalId: string,
 ): Promise<{ error?: string; quests?: DraftQuest[] }> {
-  const goal = await prisma.goal.findUnique({
-    where: { id: goalId },
+  const session = await auth();
+  if (!session?.user?.id) return { error: "Please log in again" };
+
+  const goal = await prisma.goal.findFirst({
+    where: { id: goalId, userId: session.user.id },
     select: { title: true, description: true },
   });
   if (!goal) return { error: "Goal not found" };
@@ -52,6 +56,14 @@ export async function saveQuestDraft(
   goalId: string,
   drafts: DraftQuest[],
 ): Promise<{ error?: string }> {
+    const session = await auth();
+  if (!session?.user?.id) return { error: "Please log in again" };
+
+  const owns = await prisma.goal.findFirst({
+    where: { id: goalId, userId: session.user.id },
+    select: { id: true },
+  });
+  if (!owns) return { error: "Goal not found" };
   const clean = drafts.filter((d) => d.title.trim()).slice(0, 12);
   if (clean.length === 0) return { error: "Add at least one quest" };
 

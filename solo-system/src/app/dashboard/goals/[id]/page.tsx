@@ -1,10 +1,11 @@
 // src/app/dashboard/goals/[id]/page.tsx
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { awardXp } from "@/lib/leveling";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { auth } from "@/lib/auth";
 
 import AiQuestPlanner from "./AiQuestPlanner";
 import type { VideoResource } from "@/lib/youtube";
@@ -12,8 +13,18 @@ import type { VideoResource } from "@/lib/youtube";
 async function addQuest(goalId: string, formData: FormData) {
   "use server";
 
+  const session = await auth();
+  if (!session?.user?.id) return;
+
   const title = formData.get("title") as string;
   if (!title) return;
+
+  // Only the goal's owner can add quests to it
+  const owns = await prisma.goal.findFirst({
+    where: { id: goalId, userId: session.user.id },
+    select: { id: true },
+  });
+  if (!owns) return;
 
   const questCount = await prisma.quest.count({ where: { goalId } });
 
@@ -32,30 +43,42 @@ async function addQuest(goalId: string, formData: FormData) {
 async function completeQuest(questId: string, goalId: string) {
   "use server";
 
-  const quest = await prisma.quest.update({
-    where: { id: questId },
+  const session = await auth();
+  if (!session?.user?.id) return;
+  const userId = session.user.id;
+
+  // One atomic update: only matches if the quest belongs to this user's goal
+  // AND is not already completed. A replay or double-click matches nothing,
+  // so XP can't be awarded twice.
+  const result = await prisma.quest.updateMany({
+    where: {
+      id: questId,
+      goalId,
+      status: { not: "COMPLETED" },
+      goal: { userId },
+    },
     data: { status: "COMPLETED", completedAt: new Date() },
   });
+  if (result.count === 0) return;
 
-  const goal = await prisma.goal.findUnique({
-    where: { id: goalId },
-    select: { userId: true },
+  const quest = await prisma.quest.findUnique({
+    where: { id: questId },
+    select: { xpReward: true },
   });
-
-  if (goal) {
-    await awardXp(goal.userId, quest.xpReward);
+  if (quest) {
+    await awardXp(userId, quest.xpReward);
   }
 
   const remainingQuests = await prisma.quest.count({
     where: { goalId, status: { not: "COMPLETED" } },
   });
 
-  if (remainingQuests === 0 && goal) {
+  if (remainingQuests === 0) {
     await prisma.goal.update({
       where: { id: goalId },
       data: { status: "COMPLETED" },
     });
-    await awardXp(goal.userId, 50);
+    await awardXp(userId, 50);
   }
 
   revalidatePath(`/dashboard/goals/${goalId}`);
@@ -68,8 +91,12 @@ export default async function GoalDetailPage({
 }) {
   const { id } = await params;
 
-  const goal = await prisma.goal.findUnique({
-    where: { id },
+  const session = await auth();
+  if (!session?.user?.id) redirect("/login");
+
+  // Only load the goal if it belongs to the logged-in user
+  const goal = await prisma.goal.findFirst({
+    where: { id, userId: session.user.id },
     include: { quests: { orderBy: { order: "asc" } } },
   });
 
@@ -213,7 +240,7 @@ export default async function GoalDetailPage({
                       >
                         <button
                           type="submit"
-                          className="font-aeo font-extralight bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9]text-white font-semibold py-2 px-3 rounded-l-3xl rounded-tr-3xl rounded-br-lg text-sm transition-all whitespace-nowrap"
+                          className="font-aeo font-extralight bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold py-2 px-3 rounded-l-3xl rounded-tr-3xl rounded-br-lg text-sm transition-all whitespace-nowrap"
                         >
                           +{quest.xpReward} XP
                         </button>
