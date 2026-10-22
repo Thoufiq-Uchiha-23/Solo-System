@@ -9,6 +9,7 @@ import { auth } from "@/lib/auth";
 
 import AiQuestPlanner from "./AiQuestPlanner";
 import type { VideoResource } from "@/lib/youtube";
+import RefreshVideosButton from "./RefreshVideosButton";
 
 async function addQuest(goalId: string, formData: FormData) {
   "use server";
@@ -255,11 +256,17 @@ export default async function GoalDetailPage({
       </div>
 
       {/* YOUTUBE RECOMMENDATIONS VIDEOS */}
-      {videos.length > 0 && (
-        <div className="mt-10 font-aeo py-10 px-20">
-          <h2 className="text-4xl font-bold mb-6 font-vega uppercase">
-            Resources
-          </h2>
+      <div className="mt-10 font-aeo py-10 px-20">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-4xl font-bold font-vega uppercase">Resources</h2>
+          <RefreshVideosButton goalId={goal.id} />
+        </div>
+
+        {videos.length === 0 ? (
+          <p className="text-slate-500">
+            No videos yet. Press refresh to find some.
+          </p>
+        ) : (
           <div className="grid grid-cols-4 grid-rows-2 gap-3">
             {videos.map((v) => (
               <a
@@ -282,8 +289,8 @@ export default async function GoalDetailPage({
               </a>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

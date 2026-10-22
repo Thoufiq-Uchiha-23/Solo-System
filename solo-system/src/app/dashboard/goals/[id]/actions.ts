@@ -86,3 +86,30 @@ export async function saveQuestDraft(
   revalidatePath(`/dashboard/goals/${goalId}`);
   return {};
 }
+
+export async function refreshVideos(goalId: string): Promise<{ error?: string }> {
+  const session = await auth();
+  if (!session?.user?.id) return { error: "Please log in again" };
+
+  const goal = await prisma.goal.findFirst({
+    where: { id: goalId, userId: session.user.id },
+    select: { title: true },
+  });
+  if (!goal) return { error: "Goal not found" };
+
+  const videos = await searchVideos([
+    `${goal.title} tutorial for beginners`,
+    `${goal.title} roadmap`,
+  ]);
+  if (videos.length === 0) {
+    return { error: "Couldn't find videos right now. Try again later." };
+  }
+
+  await prisma.goal.update({
+    where: { id: goalId },
+    data: { resources: videos },
+  });
+
+  revalidatePath(`/dashboard/goals/${goalId}`);
+  return {};
+}
