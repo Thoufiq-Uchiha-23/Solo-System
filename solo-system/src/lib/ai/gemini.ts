@@ -13,6 +13,7 @@ export const geminiProvider: AIProvider = {
       {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+        signal: AbortSignal.timeout(20000),
         body: JSON.stringify({
           contents: [{ parts: [{ text: buildPrompt(goalTitle, goalDescription) }] }],
           generationConfig: { responseMimeType: "application/json" },

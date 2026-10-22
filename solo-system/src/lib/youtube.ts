@@ -15,7 +15,9 @@ function decode(s: string) {
     .replace(/&gt;/g, ">");
 }
 
-export async function searchVideos(queries: string[]): Promise<VideoResource[]> {
+export async function searchVideos(
+  queries: string[],
+): Promise<VideoResource[]> {
   const key = process.env.YOUTUBE_API_KEY;
   if (!key) return [];
 
@@ -32,7 +34,12 @@ export async function searchVideos(queries: string[]): Promise<VideoResource[]> 
         q,
         key,
       });
-      const res = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`);
+      const res = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?${params}`,
+        {
+          signal: AbortSignal.timeout(8000),
+        },
+      );
       if (!res.ok) continue;
 
       const data = await res.json();

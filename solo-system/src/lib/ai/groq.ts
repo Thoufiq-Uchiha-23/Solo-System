@@ -14,6 +14,7 @@ export const groqProvider: AIProvider = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${key}`,
       },
+      signal: AbortSignal.timeout(20000),
       body: JSON.stringify({
         model,
         messages: [{ role: "user", content: buildPrompt(goalTitle, goalDescription) }],

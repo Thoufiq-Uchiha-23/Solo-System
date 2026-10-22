@@ -8,12 +8,16 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   const [error, setError] = useState("");
   const [pending, startTransition] = useTransition();
 
-  function generate() {
+    function generate() {
     setError("");
     startTransition(async () => {
-      const res = await generateQuestDraft(goalId);
-      if (res.error || !res.quests) setError(res.error ?? "Something went wrong");
-      else setDraft(res.quests);
+      try {
+        const res = await generateQuestDraft(goalId);
+        if (res.error || !res.quests) setError(res.error ?? "Something went wrong");
+        else setDraft(res.quests);
+      } catch {
+        setError("Something went wrong. Please try again.");
+      }
     });
   }
 
