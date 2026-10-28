@@ -7,8 +7,8 @@ import Link from "next/link";
 import { ChevronLeft, LogOut } from "lucide-react";
 import { ProfileEditClient } from "@/components/ProfileEditClient";
 import { getWeeklyMetrics } from "@/lib/metrics";
-import { CircularProgress } from "@/components/CircularProgress";
-import Image from "next/image";
+// import { CircularProgress } from "@/components/CircularProgress";
+// import Image from "next/image";
 import { ProfileMetrics } from "@/components/ProfileMetrics";
 
 async function updateProfile(formData: FormData) {
@@ -55,6 +55,10 @@ export default async function ProfilePage() {
   });
 
   if (!user) return <p>User not found</p>;
+
+  const socialLinks = (
+    Array.isArray(user.socialLinks) ? user.socialLinks : []
+  ) as { platform: string; url: string }[];
 
   const goals = await prisma.goal.findMany({
     where: { userId: session.user.id },
@@ -114,8 +118,8 @@ export default async function ProfilePage() {
                 {user.image ? (
                   <img
                     src={user.image}
-                    alt={user.name}
-                    className="w-[150] h-[150] rounded-lg object-cover "
+                    alt={user.name ?? "Profile"}
+                    className="w-[150px] h-[150px] rounded-lg object-cover"
                   />
                 ) : (
                   <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-[#2355c1] to-[#042469] flex items-center justify-center text-5xl font-bold border-4 border-slate-900">
@@ -134,11 +138,10 @@ export default async function ProfilePage() {
 
               {/* Level & Rank Badge */}
               <div className="text-right pb-2">
-                
                 {/* Edit Profile Button */}
                 <div className="mb-8">
                   <ProfileEditClient
-                    user={user}
+                    user={{ ...user, socialLinks }}
                     updateProfileAction={updateProfile}
                   />
                 </div>
@@ -234,13 +237,11 @@ export default async function ProfilePage() {
         </form> */}
 
         {/* Social Links Section */}
-        {user.socialLinks && user.socialLinks.length > 0 && (
+        {socialLinks.length > 0 && (
           <div className="mb-12">
             <h2 className="text-2xl font-bold font-vega mb-4">Social Links</h2>
             <div className="space-y-2">
-              {(
-                user.socialLinks as Array<{ platform: string; url: string }>
-              ).map((link, index) => (
+              {socialLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.url}
