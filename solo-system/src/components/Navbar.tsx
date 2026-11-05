@@ -4,8 +4,7 @@
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LogOut, Zap, User, Home } from "lucide-react";
-import { useMemo } from "react";
+import { LogOut, User, Home } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
@@ -22,12 +21,8 @@ export default function Navbar() {
     return null;
   }
 
-  // Memoized active tab check
-  const isActive = useMemo(
-    () => (href: string) =>
-      pathname === href || pathname.startsWith(href + "/"),
-    [pathname],
-  );
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   return (
     <nav className="bg-[#2355c1]/10 fixed flex justify-between w-full top-0 z-50">
@@ -48,33 +43,33 @@ export default function Navbar() {
 
           {status === "authenticated" && session?.user && (
             <>
-              {/* Navigation Tabs - Only show when authenticated */}
-              {status === "authenticated" && (
-                <div className="hidden md:flex items-center p-1 gap-2 mx-auto">
-                  {NAV_LINKS.map(({ href, label, icon: Icon }) => {
-                    const active = isActive(href);
-                    return (
-                      <Link
-                        key={href}
-                        href={href}
-                        className={`flex items-center gap-1 px-3 py-1 rounded-t-3xl rounded-bl-3xl rounded-br-lg transition-all duration-200 font-aeo text-xl font-medium ${
-                          active
-                            ? "bg-white/10 text-white border-[0.3px] border-white/3"
-                            : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
-                        }`}
-                      >
-                        <Icon className="w-4 h-4" />
-                        <p>{label}</p>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
+              {/* Navigation Tabs */}
+              <div className="hidden md:flex items-center p-1 gap-2 mx-auto">
+                {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+                  const active = isActive(href);
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      className={`flex items-center gap-1 px-3 py-1 rounded-t-3xl rounded-bl-3xl rounded-br-lg transition-all duration-200 font-aeo text-xl font-medium ${
+                        active
+                          ? "bg-white/10 text-white border-[0.3px] border-white/3"
+                          : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <p>{label}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+
               <div className="text-right font-aeo">
                 <div className="font-medium text-white text-2xl">
                   {session.user.name || session.user.email}
                 </div>
               </div>
+
               <button
                 onClick={() => signOut({ callbackUrl: "/login" })}
                 className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-3xl transition-all"
@@ -89,15 +84,15 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="px-4 py-2 text-slate-300 hover:text-white transition-colors text-sm font-medium"
+                className="px-6 py-2 text-lg font-aeo text-zinc-300 hover:text-white transition-colors"
               >
-                Log in
+                Log In
               </Link>
               <Link
                 href="/register"
-                className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-lg font-medium text-sm transition-all"
+                className="px-4 py-2 text-lg font-aeo bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-full font-semibold transition-all"
               >
-                Sign up
+                Sign Up
               </Link>
             </div>
           )}

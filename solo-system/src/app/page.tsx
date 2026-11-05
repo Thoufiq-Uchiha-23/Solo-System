@@ -1,54 +1,184 @@
-"use client"
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth"; // adjust to wherever your NextAuth v5 `auth` export lives
 
-import Link from "next/link"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+export const metadata: Metadata = {
+  title: "Solo System - Turn your goals into quests",
+  description:
+    "Break any goal into quests, earn XP for every one you finish, and rank up from E to S. AI-generated quests and video guides included.",
+};
 
-export default function Home() {
-  const { data: session } = useSession()
-  const router = useRouter()
+const GITHUB_URL = "https://github.com/your-username/solo-system"; // TODO: replace
 
-  useEffect(() => {
-    if (session) {
-      router.push("/dashboard")
-    }
-  }, [session, router])
+const steps = [
+  {
+    title: "Set a goal",
+    body: "Name what you want to achieve. Solo System also finds starter YouTube videos for it right away.",
+  },
+  {
+    title: "Generate your quests",
+    body: "AI drafts a list of quests for the goal. Edit, add or remove any of them before they are saved.",
+  },
+  {
+    title: "Finish quests, earn XP",
+    body: "Each completed quest gives XP. Finish them all and the goal completes with a bonus.",
+  },
+];
+
+const showcase = [
+  {
+    title: "Describe the goal. Get the plan.",
+    body: "Tell Solo System what you want to achieve and AI drafts the quests for you. Spend your energy doing the work, not planning it.",
+    points: [
+      "Review the draft and edit, add or remove quests before anything is saved",
+      "Every quest carries a difficulty, and its XP follows from it",
+      "If one AI provider is down, another takes over automatically",
+    ],
+    image: "/landing/ai-quests.png",
+    alt: "Goal page showing a list of AI-generated quests in an editable draft, each with a difficulty and XP reward",
+    glow: "bg-amber-500/20",
+  },
+  {
+    title: "Learn while you work",
+    body: "Every goal comes with a shelf of videos, so you never start from a blank search bar.",
+    points: [
+      "Starter YouTube tutorials, tips and roadmaps are found from your goal title",
+      "They are added automatically when you create the goal",
+      "Saved with the goal, so they are waiting every time you come back",
+    ],
+    image: "/landing/video-guides.png",
+    alt: "Goal page with a row of recommended YouTube video cards for learning the goal",
+    glow: "bg-[#2355c1]/30",
+  },
+  {
+    title: "Every quest pays out",
+    body: "Finishing real work moves a real number. XP turns progress you can feel into a level and rank you can see.",
+    points: [
+      "Easy quests give 10 XP, medium 15 and hard 25",
+      "Finish the last quest and the goal completes with bonus XP",
+      "Your level and rank, from E up to S, update as you earn",
+    ],
+    image: "/landing/xp-rank.png",
+    alt: "Profile page showing level, rank badge and XP progress toward the next level",
+    glow: "bg-amber-500/20",
+  },
+  {
+    title: "See your week at a glance",
+    body: "Your profile shows how the week is really going, so you can tell when you are on a roll and when you have slipped.",
+    points: [
+      "XP earned this week, with a daily XP bar chart",
+      "Goals completed and your current streak",
+      "A progress ring for your quests",
+    ],
+    image: "/landing/weekly-stats.png",
+    alt: "Profile page weekly stats: XP this week, goals completed, streak, a quest progress ring and a daily XP bar chart",
+    glow: "bg-[#2355c1]/30",
+  },
+];
+
+const extras = [
+  {
+    title: "Always know what is next",
+    body: "The next quest in line is marked “Up Next”, so you never wonder where to start. It is a nudge, not a lock, so you can still tackle quests in any order.",
+  },
+  {
+    title: "A profile worth showing",
+    body: "Set a banner and profile picture, add your social links, and keep a list of every goal you have completed.",
+  },
+];
+
+const ranks = [
+  { letter: "E", height: "h-16" },
+  { letter: "D", height: "h-24" },
+  { letter: "C", height: "h-32" },
+  { letter: "B", height: "h-40" },
+  { letter: "A", height: "h-48" },
+  { letter: "S", height: "h-56" },
+];
+
+const faqs = [
+  {
+    q: "Is Solo System free?",
+    a: "Yes. You can create an account and use every feature at no cost.",
+  },
+  {
+    q: "How does AI quest generation work?",
+    a: "You give a goal, and the AI drafts quests for it. Nothing is saved until you have reviewed the list, and you can edit, add or delete quests first.",
+  },
+  {
+    q: "Do I have to finish quests in order?",
+    a: "No. The next quest in line is marked “Up Next” as a suggestion, but you can complete them in any order.",
+  },
+  {
+    q: "How do XP, levels and ranks work?",
+    a: "Each quest awards 10, 15 or 25 XP for easy, medium or hard. Your total XP sets your level, and your level sets your rank from E up to S.",
+  },
+  {
+    q: "Where do the video recommendations come from?",
+    a: "They come from YouTube, searched using your goal title. You get tutorials, tips and roadmaps without leaving the goal page.",
+  },
+  {
+    q: "How do I sign in?",
+    a: "Use your Google account, or register with an email and password.",
+  },
+];
+
+function Check() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 20 20"
+      className="mt-1 h-5 w-5 flex-none text-amber-300"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 10.5l4 4 8-9" />
+    </svg>
+  );
+}
+
+function Frame({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+      <Image
+        src={src}
+        alt={alt}
+        width={1600}
+        height={1000}
+        className="rounded-2xl"
+      />
+    </div>
+  );
+}
+
+const primaryBtn =
+  "inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#2355c1] to-[#042469] px-6 py-3 font-semibold text-white shadow-lg shadow-blue-900/40 ring-1 ring-white/15 transition hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400";
+const ghostBtn =
+  "inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400";
+
+export default async function LandingPage() {
+  const session = await auth();
+  if (session?.user) redirect("/dashboard");
 
   return (
-    <div className="h-auto bg-slate-950 text-white overflow-x-hidden">
-      {/* Animated background blobs */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-40 right-20 w-80 h-80 bg-amber-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+    <main className="relative overflow-x-hidden bg-slate-950 text-white">
+      {/* background glow */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-40 top-0 h-[28rem] w-[28rem] rounded-full bg-[#2355c1]/30 blur-3xl" />
+        <div className="absolute right-[-10rem] top-[40rem] h-[30rem] w-[30rem] rounded-full bg-[#042469]/60 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-[24rem] w-[24rem] rounded-full bg-amber-500/10 blur-3xl" />
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-20 flex justify-between items-center px-6 py-4 border-b border-white/5 backdrop-blur-sm">
-        <h1 className="text-2xl font-bold font-solo bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-          Solo System
-        </h1>
-        <div className="flex gap-4">
-          <Link
-            href="/login"
-            className="px-6 py-2 text-sm font-aeo text-zinc-300 hover:text-white transition-colors"
-          >
-            Log In
-          </Link>
-          <Link
-            href="/register"
-            className="px-6 py-2 text-sm font-aeo bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-lg font-semibold transition-all"
-          >
-            Sign Up
-          </Link>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto text-center">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-6xl md:text-7xl font-black font-solo leading-tight">
+      <div className="h-auto bg-slate-950 text-white overflow-x-hidden">
+        {/* Hero Section */}
+        <section className="relative z-10 mx-auto text-center pt-[150px] px-20">
+          <div className="space-y-8 py-20">
+            <h2 className="text-6xl md:text-7xl font-black font-vega leading-tight">
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600 bg-clip-text text-transparent">
                 Level Up
               </span>
@@ -56,162 +186,209 @@ export default function Home() {
               <span className="text-white">Your Real Life</span>
             </h2>
             <p className="text-lg md:text-xl text-zinc-400 font-aeo max-w-2xl mx-auto">
-              Turn your goals into quests. Earn XP, gain ranks, and master your life like an RPG. 
-              Every goal completed is your next level.
+              Turn your goals into quests. Earn XP, gain ranks, and master your
+              life like an RPG. Every goal completed is your next level.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Link
+                href="/register"
+                className="px-8 py-4 text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
+              >
+                Start Your Journey
+              </Link>
+
+              <Link
+                href="/login"
+                className="px-8 py-4 text-xl font-extralight font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
+              >
+                Already a Hunter?
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div className="relative mx-auto px-6">
+        {/* HERO */}
+        <section className="flex-col items-center gap-12 py-20 w-full px-20">
+          <div className="mx-auto max-w-3xl text-center px-10 py-20">
+            <h1 className="font-vega text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              Turn your goals into quests, and level up for real.
+            </h1>
+            <p className="font-sato mt-6 text-lg text-zinc-300 text-center">
+              Solo System breaks any goal into quests you can finish, gives you
+              XP for every one, and ranks you up from E to S.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link
-              href="/register"
-              className="px-8 py-4 text-lg font-semibold font-aeo bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-lg transition-all transform hover:scale-105 active:scale-95"
-            >
-              Start Your Journey
-            </Link>
-            <Link
-              href="/login"
-              className="px-8 py-4 text-lg font-semibold font-aeo border border-white/20 hover:border-white/40 rounded-lg backdrop-blur-sm hover:bg-white/5 transition-all"
-            >
-              Already a Hunter?
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Showcase */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto">
-        <div className="space-y-12">
-          {/* Feature 1: XP & Leveling */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4">
-              <h3 className="text-3xl font-bold font-solo text-white">Gain XP, Rise Through Ranks</h3>
-              <p className="text-zinc-300 font-aeo leading-relaxed">
-                Complete real-life goals and earn XP. Progress from E-rank to S-rank as you master your objectives. 
-                Your level reflects your actual growth and commitment.
-              </p>
-            </div>
-            <div className="backdrop-blur-md bg-blue-950/20 border border-blue-500/30 rounded-xl p-6 space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-aeo text-zinc-300">Level 15</span>
-                <span className="font-aeo text-amber-400">E-Rank Hunter</span>
-              </div>
-              <div className="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-500 to-blue-600 h-full w-2/3"></div>
-              </div>
-              <p className="text-xs font-aeo text-zinc-400">2,450 / 3,200 XP</p>
+          <div className="px-20">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+              <img
+                src="/landing/dashboard.png"
+                alt="Solo System dashboard showing goals, level and XP"
+                className="rounded-2xl w-full h-[400px]"
+              />
             </div>
           </div>
+        </section>
 
-          {/* Feature 2: Quest System */}
-          <div className="grid md:grid-cols-2 gap-12 items-center md:order-2">
-            <div className="backdrop-blur-md bg-amber-950/20 border border-amber-500/30 rounded-xl p-6 space-y-3 md:order-2">
-              <p className="font-aeo font-semibold text-amber-300">Daily Quest</p>
-              <div className="space-y-2">
-                <p className="text-sm text-white">Run 5km</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-amber-400"></div>
-                  <span className="text-xs text-zinc-400 font-aeo">4/5 km complete</span>
+        {/* FEATURES */}
+        <section className="py-16 px-20">
+          <h2 className="font-vega text-4xl text-center font-bold sm:text-5xl lg:text-6xl">
+            Less planning. More doing.
+          </h2>
+          <p className="font-sato mt-3 text-center text-slate-300">
+            Four tools that take you from a vague goal to finished work, and
+            reward you on the way.
+          </p>
+
+          <div className="mt-16 space-y-24">
+            {showcase.map((f, i) => {
+              const flip = i % 2 === 1;
+              return (
+                <article
+                  key={f.title}
+                  className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+                >
+                  <div className={flip ? "lg:order-2" : ""}>
+                    <h3 className="font-vega text-2xl font-bold sm:text-3xl">
+                      {f.title}
+                    </h3>
+                    <p className="font-sato mt-4 max-w-md text-lg text-slate-300">
+                      {f.body}
+                    </p>
+                    <ul className="font-sato mt-6 space-y-3 text-slate-200">
+                      {f.points.map((p) => (
+                        <li key={p} className="flex gap-3">
+                          <Check />
+                          <span>{p}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div
+                    className={`relative isolate ${flip ? "lg:order-1" : ""}`}
+                  >
+                    <div
+                      aria-hidden
+                      className={`absolute -inset-6 -z-10 rounded-full blur-3xl ${f.glow}`}
+                    />
+                    <Frame src={f.image} alt={f.alt} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* <div className="mt-24 grid gap-6 md:grid-cols-2">
+            {extras.map((e) => (
+              <article
+                key={e.title}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+              >
+                <h3 className="font-vega text-xl font-semibold">{e.title}</h3>
+                <p className="font-sato mt-2 text-slate-300">{e.body}</p>
+              </article>
+            ))}
+          </div> */}
+        </section>
+
+        {/* RANK LADDER */}
+        <section className="py-16 px-20">
+          <h2 className="font-vega text-3xl font-bold sm:text-4xl">
+            Climb from E to S
+          </h2>
+          <p className="font-sato mt-3 max-w-xl text-slate-300">
+            Every finished quest adds XP. As your level grows, so does your
+            rank.
+          </p>
+          <div className="mt-10 flex items-end gap-3 sm:gap-5">
+            {ranks.map((r) => {
+              const isTop = r.letter === "S";
+              return (
+                <div
+                  key={r.letter}
+                  className={`font-vega flex flex-1 items-start justify-center rounded-xl border pt-4 text-3xl font-bold backdrop-blur-xl sm:text-5xl ${r.height} ${
+                    isTop
+                      ? "border-amber-400/60 bg-gradient-to-b from-amber-400/30 to-amber-400/5 text-amber-300 shadow-lg shadow-amber-500/20"
+                      : "border-white/10 bg-gradient-to-b from-[#2355c1]/30 to-white/5 text-white"
+                  }`}
+                >
+                  {r.letter}
                 </div>
-              </div>
-              <p className="text-xs font-aeo text-amber-300">+200 XP reward</p>
-            </div>
-            <div className="space-y-4 md:order-1">
-              <h3 className="text-3xl font-bold font-solo text-white">Transform Goals into Quests</h3>
-              <p className="text-zinc-300 font-aeo leading-relaxed">
-                Break down your ambitions into actionable quests. Track progress in real-time and watch your 
-                momentum build. Each quest cleared pushes you closer to mastery.
-              </p>
-            </div>
+              );
+            })}
           </div>
+        </section>
 
-          {/* Feature 3: Progression */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4">
-              <h3 className="text-3xl font-bold font-solo text-white">Permanent Progress</h3>
-              <p className="text-zinc-300 font-aeo leading-relaxed">
-                Your achievements compound over time. Lifetime levels, rank progression, and cumulative stats 
-                create a real sense of evolution and accomplishment.
-              </p>
-            </div>
-            <div className="backdrop-blur-md bg-slate-800/50 border border-white/10 rounded-xl p-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="font-aeo text-white">Total XP Earned</span>
-                <span className="font-solo text-2xl text-blue-400">24,850</span>
-              </div>
-              <div className="h-px bg-gradient-to-r from-blue-500/50 to-transparent"></div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="font-aeo text-zinc-400 text-xs">Goals Completed</p>
-                  <p className="font-solo text-2xl text-white">42</p>
-                </div>
-                <div>
-                  <p className="font-aeo text-zinc-400 text-xs">Current Rank</p>
-                  <p className="font-solo text-2xl text-amber-400">D-Rank</p>
-                </div>
-              </div>
-            </div>
+        {/* FAQ */}
+        <section className="py-16 px-20">
+          <h2 className="font-vega text-6xl text-center font-bold">
+            FAQ
+          </h2>
+          <div className="mt-10 px-20 space-y-3">
+            {faqs.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl open:bg-white/10"
+              >
+                <summary className="font-sato flex cursor-pointer list-none items-center justify-between gap-4 text-xl font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span
+                    aria-hidden
+                    className="text-2xl text-amber-300 transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="font-sato mt-3 text-slate-300">{f.a}</p>
+              </details>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* How It Works */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto">
-        <h3 className="text-4xl font-bold font-solo text-center mb-16">Your Ascension Begins</h3>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="backdrop-blur-md bg-blue-950/10 border border-blue-500/20 rounded-xl p-8 space-y-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center font-solo text-lg font-bold">
-              1
-            </div>
-            <h4 className="text-xl font-bold font-aeo text-white">Create Your Goal</h4>
-            <p className="text-zinc-400 font-aeo leading-relaxed">
-              Define what you want to achieve. Set the scope, difficulty, and watch it transform into your first quest.
+        {/* FINAL CTA */}
+        <section className="py-16 px-20">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#2355c1]/30 to-[#042469]/30 p-10 text-center backdrop-blur-xl sm:p-16">
+            <h2 className="font-vega text-3xl font-bold sm:text-4xl lg:text-6xl">
+              Your first quest is one goal away
+            </h2>
+            <p className="font-sato mx-auto mt-4 font-extralight text-2xl text-slate-300">
+              Create an account, add a goal, and let Solo System draft the
+              quests.
             </p>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Link
+                href="/register"
+                className="px-8 py-4 text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
+              >
+                Join Now
+              </Link>
 
-          <div className="backdrop-blur-md bg-blue-950/10 border border-blue-500/20 rounded-xl p-8 space-y-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center font-solo text-lg font-bold">
-              2
+              <Link
+                href="/login"
+                className="px-8 py-4 text-xl font-extralight font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
+              >
+                Login Here
+              </Link>
             </div>
-            <h4 className="text-xl font-bold font-aeo text-white">Complete Quests</h4>
-            <p className="text-zinc-400 font-aeo leading-relaxed">
-              Take action and mark progress. Each milestone gets you closer to goal completion and rank advancement.
-            </p>
           </div>
+        </section>
 
-          <div className="backdrop-blur-md bg-blue-950/10 border border-blue-500/20 rounded-xl p-8 space-y-4">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center font-solo text-lg font-bold">
-              3
-            </div>
-            <h4 className="text-xl font-bold font-aeo text-white">Level & Evolve</h4>
-            <p className="text-zinc-400 font-aeo leading-relaxed">
-              Earn XP, unlock new ranks, and watch your stats grow. Your progress is permanent and always visible.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative z-10 px-6 py-20 max-w-3xl mx-auto text-center">
-        <div className="backdrop-blur-md bg-gradient-to-r from-blue-950/30 to-slate-900/30 border border-blue-500/30 rounded-2xl p-12 space-y-8">
-          <div className="space-y-4">
-            <h3 className="text-4xl font-bold font-solo text-white">Ready to Begin?</h3>
-            <p className="text-lg text-zinc-300 font-aeo">
-              Every legend starts as an E-rank hunter. Start your ascension today.
-            </p>
-          </div>
-          <Link
-            href="/register"
-            className="inline-block px-10 py-4 text-lg font-semibold font-aeo bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-lg transition-all transform hover:scale-105 active:scale-95"
+        {/* FOOTER */}
+        <footer className="font-sato flex flex-wrap items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-slate-400">
+          <p>Built by Thoufiq. Inspired by Solo Leveling.</p>
+          <p>Solo System &copy; 2026. Level up your real life.</p>
+          {/* <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
-            Create Your Account
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 px-6 py-8 border-t border-white/5 backdrop-blur-sm text-center text-zinc-500 font-aeo text-sm">
-        <p>Solo System © 2024. Level up your real life.</p>
-      </footer>
-    </div>
-  )
+            View source on GitHub
+          </a> */}
+        </footer>
+      </div>
+    </main>
+  );
 }

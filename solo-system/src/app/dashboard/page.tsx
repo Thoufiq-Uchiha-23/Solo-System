@@ -51,7 +51,7 @@ export default async function DashboardPage() {
   const progressPercent = (current / needed) * 100;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="h-auto text-white">
       <div className="max-w-2xl mx-auto px-4 py-8 mt-[100px]">
         {/* Header */}
         <div className="">
@@ -109,14 +109,14 @@ export default async function DashboardPage() {
           {goals.length === 0 ? (
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 text-center">
               <p className="text-slate-400">
-                No goals yet — create one above to begin your journey.
+                No goals yet - create one above to begin your journey.
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 mb-3">
               {goals.map((goal) => (
                 <Link key={goal.id} href={`/dashboard/goals/${goal.id}`}>
-                  <div className="bg-slate-900 border-slate-700 rounded-lg p-4 transition-all hover:bg-[#030c21] cursor-pointer group">
+                  <div className="bg-slate-900 border-slate-700 rounded-lg p-4 transition-all hover:bg-[#030c21] cursor-pointer group mb-3">
                     <div className="flex items-start justify-between font-sato">
                       <div className="flex-1">
                         <h3 className="font-semibold text-white group-hover:text-[#2355c1] transition-colors">

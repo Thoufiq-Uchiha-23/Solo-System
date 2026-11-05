@@ -111,7 +111,7 @@ export default async function GoalDetailPage({
   const totalQuests = goal.quests.length;
 
   return (
-    <div className="h-auto bg-slate-950 text-white">
+    <div className="h-auto bg-slate-950 text-white mt-[100px]">
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
