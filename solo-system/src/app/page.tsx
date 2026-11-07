@@ -133,25 +133,25 @@ const faqs = [
   },
 ];
 
-function Frame({
-  src,
-  alt,
-}: {
-  src: string | StaticImageData;
-  alt: string;
-}) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
-      <Image
-        src={src}
-        alt={alt}
-        width={1600}
-        height={1000}
-        className="rounded-2xl"
-      />
-    </div>
-  );
-}
+// function Frame({
+//   src,
+//   alt,
+// }: {
+//   src: string | StaticImageData;
+//   alt: string;
+// }) {
+//   return (
+//     <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+//       <Image
+//         src={src}
+//         alt={alt}
+//         width={1600}
+//         height={1000}
+//         className="rounded-2xl"
+//       />
+//     </div>
+//   );
+// }
 
 export default async function LandingPage() {
   const session = await auth();
@@ -265,7 +265,16 @@ export default async function LandingPage() {
                       aria-hidden
                       className={`absolute -inset-6 -z-10 rounded-full blur-3xl ${f.glow}`}
                     />
-                    <Frame src={f.image} alt={f.alt} />
+                    {/* <Frame src={f.image} alt={f.alt} /> */}
+                    <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+                      <Image
+                        src={f.image}
+                        alt={f.title}
+                        width={1600}
+                        height={1000}
+                        className="rounded-2xl"
+                      />
+                    </div>
                   </div>
                 </article>
               );
