@@ -1,6 +1,11 @@
-import type { NextAuthConfig } from "next-auth"
+import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
   providers: [],
-  pages: { signIn: "/login" },
-} satisfies NextAuthConfig
+  pages: {
+    signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+  },
+} satisfies NextAuthConfig;
