@@ -20,6 +20,15 @@ export const metadata: Metadata = {
     "Break any goal into quests, earn XP for every one you finish, and rank up from E to S. AI-generated quests and video guides included.",
 };
 
+type ShowcaseItem = {
+  title: string;
+  body: string;
+  points: string[];
+  image: string | StaticImageData;
+  alt: string;
+  glow: string;
+};
+
 // const steps = [
 //   {
 //     title: "Set a goal",
@@ -35,7 +44,7 @@ export const metadata: Metadata = {
 //   },
 // ];
 
-const showcase = [
+const showcase: ShowcaseItem[] = [
   {
     title: "Describe the goal. Get the plan.",
     body: "Tell Solo System what you want to achieve and AI drafts the quests for you. Spend your energy doing the work, not planning it.",
