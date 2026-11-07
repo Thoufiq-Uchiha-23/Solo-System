@@ -25,18 +25,18 @@ export default function Navbar() {
     pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <nav className="bg-[#2355c1]/10 fixed flex justify-between w-full top-0 z-50">
-      <div className="w-full mx-auto px-20 py-7 flex items-center justify-between">
+    <nav className="bg-[#042469]/10 fixed flex justify-between w-full top-0 z-50">
+      <div className="w-full mx-auto px-5 lg:px-20 py-7 flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/dashboard"
-          className="text-4xl font-extralight font-solo bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent hover:from-[#376cdf] hover:to-[#0740b9] transition-all"
+          className="text-4xl lg:text-4xl font-extralight font-solo bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent hover:from-[#376cdf] hover:to-[#0740b9] transition-all"
         >
           Solo System
         </Link>
 
         {/* Right Side */}
-        <div className="flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6">
           {status === "loading" && (
             <span className="text-slate-400 text-sm">Loading...</span>
           )}
@@ -81,7 +81,7 @@ export default function Navbar() {
           )}
 
           {status === "unauthenticated" && (
-            <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <Link
                 href="/login"
                 className="px-6 py-2 text-lg font-aeo text-zinc-300 hover:text-white transition-colors"

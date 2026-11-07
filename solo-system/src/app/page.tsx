@@ -4,13 +4,21 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth"; // adjust to wherever your NextAuth v5 `auth` export lives
 
+// landing page pics
+import {
+  aiQuests,
+  youtubePics,
+  xpRank,
+  stats,
+  dashPic,
+} from "../landing/index.js";
+import { ChevronsRight, Plus } from "lucide-react";
+
 export const metadata: Metadata = {
   title: "Solo System - Turn your goals into quests",
   description:
     "Break any goal into quests, earn XP for every one you finish, and rank up from E to S. AI-generated quests and video guides included.",
 };
-
-const GITHUB_URL = "https://github.com/your-username/solo-system"; // TODO: replace
 
 const steps = [
   {
@@ -36,7 +44,7 @@ const showcase = [
       "Every quest carries a difficulty, and its XP follows from it",
       "If one AI provider is down, another takes over automatically",
     ],
-    image: "/landing/ai-quests.png",
+    image: aiQuests,
     alt: "Goal page showing a list of AI-generated quests in an editable draft, each with a difficulty and XP reward",
     glow: "bg-amber-500/20",
   },
@@ -48,7 +56,7 @@ const showcase = [
       "They are added automatically when you create the goal",
       "Saved with the goal, so they are waiting every time you come back",
     ],
-    image: "/landing/video-guides.png",
+    image: youtubePics,
     alt: "Goal page with a row of recommended YouTube video cards for learning the goal",
     glow: "bg-[#2355c1]/30",
   },
@@ -60,7 +68,7 @@ const showcase = [
       "Finish the last quest and the goal completes with bonus XP",
       "Your level and rank, from E up to S, update as you earn",
     ],
-    image: "/landing/xp-rank.png",
+    image: xpRank,
     alt: "Profile page showing level, rank badge and XP progress toward the next level",
     glow: "bg-amber-500/20",
   },
@@ -72,7 +80,7 @@ const showcase = [
       "Goals completed and your current streak",
       "A progress ring for your quests",
     ],
-    image: "/landing/weekly-stats.png",
+    image: stats,
     alt: "Profile page weekly stats: XP this week, goals completed, streak, a quest progress ring and a daily XP bar chart",
     glow: "bg-[#2355c1]/30",
   },
@@ -90,12 +98,12 @@ const extras = [
 ];
 
 const ranks = [
-  { letter: "E", height: "h-16" },
-  { letter: "D", height: "h-24" },
-  { letter: "C", height: "h-32" },
-  { letter: "B", height: "h-40" },
-  { letter: "A", height: "h-48" },
-  { letter: "S", height: "h-56" },
+  { letter: "E" },
+  { letter: "D" },
+  { letter: "C" },
+  { letter: "B" },
+  { letter: "A" },
+  { letter: "S" },
 ];
 
 const faqs = [
@@ -176,16 +184,16 @@ export default async function LandingPage() {
 
       <div className="h-auto bg-slate-950 text-white overflow-x-hidden">
         {/* Hero Section */}
-        <section className="relative z-10 mx-auto text-center pt-[150px] px-20">
+        <section className="relative z-10 mx-auto text-center pt-[70px] md:pt-[150px] px-10 md:px-20">
           <div className="space-y-8 py-20">
-            <h2 className="text-6xl md:text-7xl font-black font-vega leading-tight">
+            <h2 className="text-5xl md:text-7xl font-black font-vega leading-tight">
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600 bg-clip-text text-transparent">
                 Level Up
               </span>
               <br />
               <span className="text-white">Your Real Life</span>
             </h2>
-            <p className="text-lg md:text-xl text-zinc-400 font-aeo max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/50 font-aeo max-w-2xs md:max-w-2xl mx-auto">
               Turn your goals into quests. Earn XP, gain ranks, and master your
               life like an RPG. Every goal completed is your next level.
             </p>
@@ -223,10 +231,10 @@ export default async function LandingPage() {
 
           <div className="px-20">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
-              <img
-                src="/landing/dashboard.png"
+              <Image
+                src={dashPic}
                 alt="Solo System dashboard showing goals, level and XP"
-                className="rounded-2xl w-full h-[400px]"
+                className="rounded-2xl w-full h-auto"
               />
             </div>
           </div>
@@ -237,7 +245,7 @@ export default async function LandingPage() {
           <h2 className="font-vega text-4xl text-center font-bold sm:text-5xl lg:text-6xl">
             Less planning. More doing.
           </h2>
-          <p className="font-sato mt-3 text-center text-slate-300">
+          <p className="font-sato mt-3 text-lg text-center text-slate-300">
             Four tools that take you from a vague goal to finished work, and
             reward you on the way.
           </p>
@@ -251,16 +259,16 @@ export default async function LandingPage() {
                   className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
                 >
                   <div className={flip ? "lg:order-2" : ""}>
-                    <h3 className="font-vega text-2xl font-bold sm:text-3xl">
+                    <h3 className="font-sato text-2xl font-semibold sm:text-5xl">
                       {f.title}
                     </h3>
-                    <p className="font-sato mt-4 max-w-md text-lg text-slate-300">
+                    <p className="font-sato mt-4 max-w-lg text-xl text-slate-300">
                       {f.body}
                     </p>
-                    <ul className="font-sato mt-6 space-y-3 text-slate-200">
+                    <ul className="font-sato font-light mt-6 space-y-3 text-slate-200">
                       {f.points.map((p) => (
-                        <li key={p} className="flex gap-3">
-                          <Check />
+                        <li key={p} className="flex items-center gap-3">
+                          <ChevronsRight className="w-4 h-4 text-blue-400" />
                           <span>{p}</span>
                         </li>
                       ))}
@@ -279,39 +287,29 @@ export default async function LandingPage() {
               );
             })}
           </div>
-
-          {/* <div className="mt-24 grid gap-6 md:grid-cols-2">
-            {extras.map((e) => (
-              <article
-                key={e.title}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
-              >
-                <h3 className="font-vega text-xl font-semibold">{e.title}</h3>
-                <p className="font-sato mt-2 text-slate-300">{e.body}</p>
-              </article>
-            ))}
-          </div> */}
         </section>
 
         {/* RANK LADDER */}
-        <section className="py-16 px-20">
-          <h2 className="font-vega text-3xl font-bold sm:text-4xl">
-            Climb from E to S
+        {/* <section className="py-16 px-20">
+          <h2 className="font-vega text-4xl text-center font-bold sm:text-5xl lg:text-6xl">
+            Level up your Rank
           </h2>
-          <p className="font-sato mt-3 max-w-xl text-slate-300">
+
+          <p className="font-sato mt-3 text-center text-slate-300">
             Every finished quest adds XP. As your level grows, so does your
             rank.
           </p>
-          <div className="mt-10 flex items-end gap-3 sm:gap-5">
+          <div className="mt-10 flex justify-around items-center gap-3">
             {ranks.map((r) => {
               const isTop = r.letter === "S";
+              const isRank = r.letter === "A" || r.letter === "B" || r.letter === "C" || r.letter === "D" || r.letter === "E";
               return (
                 <div
                   key={r.letter}
-                  className={`font-vega flex flex-1 items-start justify-center rounded-xl border pt-4 text-3xl font-bold backdrop-blur-xl sm:text-5xl ${r.height} ${
+                  className={`font-solo flex flex-1 items-start justify-center rounded-xl border-[0.3px] border-blue-400/50 text- pt-4 font-light backdrop-blur-xl ${
                     isTop
-                      ? "border-amber-400/60 bg-gradient-to-b from-amber-400/30 to-amber-400/5 text-amber-300 shadow-lg shadow-amber-500/20"
-                      : "border-white/10 bg-gradient-to-b from-[#2355c1]/30 to-white/5 text-white"
+                      ? " bg-gradient-to-b from-amber-400/30 to-amber-400/5 text-amber-300"
+                      : " bg-gradient-to-b from-[#2355c1]/30 to-white/5 text-white"
                   }`}
                 >
                   {r.letter}
@@ -319,26 +317,24 @@ export default async function LandingPage() {
               );
             })}
           </div>
-        </section>
+        </section> */}
 
         {/* FAQ */}
         <section className="py-16 px-20">
-          <h2 className="font-vega text-6xl text-center font-bold">
-            FAQ
-          </h2>
+          <h2 className="font-vega text-6xl text-center font-bold">FAQ</h2>
           <div className="mt-10 px-20 space-y-3">
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl open:bg-white/10"
+                className="group rounded-2xl border-[.2px] border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl open:bg-white/10"
               >
-                <summary className="font-sato flex cursor-pointer list-none items-center justify-between gap-4 text-xl font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 [&::-webkit-details-marker]:hidden">
+                <summary className="font-sato flex cursor-pointer list-none items-center justify-between gap-4 text-xl transition-all active::scale-95 duration-300 font-semibold [&::-webkit-details-marker]:hidden">
                   {f.q}
                   <span
                     aria-hidden
-                    className="text-2xl text-amber-300 transition-transform group-open:rotate-45"
+                    className="text-2xl text-blue-500 transition-transform group-open:rotate-45 duration-300"
                   >
-                    +
+                    <Plus />
                   </span>
                 </summary>
                 <p className="font-sato mt-3 text-slate-300">{f.a}</p>
@@ -379,14 +375,6 @@ export default async function LandingPage() {
         <footer className="font-sato flex flex-wrap items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-slate-400">
           <p>Built by Thoufiq. Inspired by Solo Leveling.</p>
           <p>Solo System &copy; 2026. Level up your real life.</p>
-          {/* <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-          >
-            View source on GitHub
-          </a> */}
         </footer>
       </div>
     </main>

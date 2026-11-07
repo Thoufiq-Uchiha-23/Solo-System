@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { awardXp } from "@/lib/leveling";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { Check, ChevronLeft, ChevronsRight } from "lucide-react";
 import { auth } from "@/lib/auth";
 
 import AiQuestPlanner from "./AiQuestPlanner";
@@ -213,12 +213,14 @@ export default async function GoalDetailPage({
                       <div className="flex items-center gap-3 mb-1">
                         {isUpNext && (
                           <span className="py-1 px-5 border-[0.3px] border-solid border-white/30 bg-[#042469]/30 text-white/40 text-xs rounded-3xl font-extralight">
-                            ▶ Up Next
+                            <ChevronsRight className="w-4 h-4" />
+                            Up Next
                           </span>
                         )}
                         {isCompleted && (
                           <span className="py-1 px-5 bg-green-500/20 border border-green-500/50 text-white/40 text-xs rounded-3xl font-extralight">
-                            ✓ Complete
+                            <Check className="w-4 h-4" />
+                            Complete
                           </span>
                         )}
                       </div>
@@ -267,14 +269,14 @@ export default async function GoalDetailPage({
             No videos yet. Press refresh to find some.
           </p>
         ) : (
-          <div className="grid grid-cols-4 grid-rows-2 gap-3">
+          <div className="grid grid-cols-2 grid-rows-4 gap-7">
             {videos.map((v) => (
               <a
                 key={v.id}
                 href={`https://www.youtube.com/watch?v=${v.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-slate-900 rounded-lg overflow-hidden hover:ring-2 hover:ring-[#2355c1] transition-all"
+                className="bg-[#2355c1]/10 flex w-full h-[200px] rounded-lg overflow-hidden hover:bg-[#2355c1]/20 transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -282,9 +284,9 @@ export default async function GoalDetailPage({
                   alt={v.title}
                   className="w-full aspect-video object-cover"
                 />
-                <div className="p-3">
-                  <p className="text-sm text-white line-clamp-2">{v.title}</p>
-                  <p className="text-xs text-slate-500 mt-1">{v.channel}</p>
+                <div className="p-3 w-full">
+                  <p className="text-xl text-white line-clamp-2">{v.title}</p>
+                  <p className="text-lg mb-auto text-slate-500">{v.channel}</p>
                 </div>
               </a>
             ))}

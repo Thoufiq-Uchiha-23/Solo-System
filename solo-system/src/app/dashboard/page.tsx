@@ -7,6 +7,7 @@ import { getRank, xpProgressInCurrentLevel } from "@/lib/leveling";
 import { auth } from "@/lib/auth";
 import { DashboardClient } from "@/components/DashboardClient";
 import { searchVideos } from "@/lib/youtube";
+import { ProfileEditClient } from "@/components/ProfileEditClient";
 
 async function createGoal(formData: FormData) {
   "use server";
@@ -51,8 +52,8 @@ export default async function DashboardPage() {
   const progressPercent = (current / needed) * 100;
 
   return (
-    <div className="h-auto text-white">
-      <div className="max-w-2xl mx-auto px-4 py-8 mt-[100px]">
+    <div className="h-auto text-white bg-[#030d25] px-10 py-10">
+      <div className="max-w-3xl mx-auto px-4 py-8 mt-[100px]">
         {/* Header */}
         <div className="">
           <h1 className="text-4xl font-bold tracking-tight mb-1 font-vega">
@@ -90,7 +91,7 @@ export default async function DashboardPage() {
                 {current} / {needed}
               </span>
             </div>
-            <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-black/20 rounded-full h-2 overflow-hidden">
               <div
                 className="bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] h-full rounded-full transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
@@ -116,7 +117,7 @@ export default async function DashboardPage() {
             <div className="space-y-3 mb-3">
               {goals.map((goal) => (
                 <Link key={goal.id} href={`/dashboard/goals/${goal.id}`}>
-                  <div className="bg-slate-900 border-slate-700 rounded-lg p-4 transition-all hover:bg-[#030c21] cursor-pointer group mb-3">
+                  <div className="bg-slate-900 border-slate-700 rounded-lg p-4 transition-all hover:bg-[#051335] cursor-pointer group mb-3 transition-all transform hover:scale-105 active:scale-95 duration-300">
                     <div className="flex items-start justify-between font-sato">
                       <div className="flex-1">
                         <h3 className="font-semibold text-white group-hover:text-[#2355c1] transition-colors">

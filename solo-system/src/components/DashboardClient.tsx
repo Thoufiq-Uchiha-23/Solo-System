@@ -28,7 +28,7 @@ export function DashboardClient({ createGoalAction }: DashboardClientProps) {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <button className="w-full bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold py-3 rounded-lg transition-all flex items-center justify-center gap-2 group font-sato">
+        <button className="w-full bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] duration-300 text-white font-semibold py-3 rounded-tl-4xl rounded-br-4xl rounded-lg transition-all flex items-center justify-center gap-2 group font-sato">
           <Plus className="w-5 h-5" />
           Create New Goal
         </button>

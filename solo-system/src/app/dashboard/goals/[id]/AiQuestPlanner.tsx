@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { generateQuestDraft, saveQuestDraft, type DraftQuest } from "./actions";
+import { ChevronsDown, ChevronsUp, Trash } from "lucide-react";
 
 export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   const [draft, setDraft] = useState<DraftQuest[] | null>(null);
@@ -81,7 +82,7 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   }
 
   return (
-    <div className="bg-slate-900 rounded-lg p-4 mb-8 font-aeo">
+    <div className="rounded-lg p-4 mb-8 font-aeo">
       <p className="text-slate-400 text-sm mb-4">
         Edit anything you want, then save. Nothing is added until you press
         Save.
@@ -89,19 +90,22 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
 
       <div className="space-y-3">
         {draft.map((q, i) => (
-          <div key={i} className="bg-slate-800 rounded-lg p-3 space-y-2">
+          <div
+            key={i}
+            className="bg-blue-900/30 relative backdrop-blur-2xl rounded-lg p-3 space-y-2"
+          >
             <input
               value={q.title}
               onChange={(e) => update(i, { title: e.target.value })}
               placeholder="Quest title"
-              className="w-full bg-slate-700 rounded-xl px-3 py-2 text-white"
+              className="w-full bg-sky-600/10 rounded-xl px-3 py-2 text-white z-20"
             />
             <textarea
               value={q.description ?? ""}
               onChange={(e) => update(i, { description: e.target.value })}
               placeholder="Description (optional)"
               rows={2}
-              className="w-full bg-slate-700 rounded-xl px-3 py-2 text-white text-sm"
+              className="w-full bg-sky-600/10 rounded-xl px-3 py-2 text-white text-sm z-10"
             />
             <div className="flex items-center gap-2 text-sm">
               <select
@@ -111,7 +115,7 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
                     difficulty: e.target.value as DraftQuest["difficulty"],
                   })
                 }
-                className="bg-slate-700 rounded-xl px-2 py-1 text-white"
+                className="bg-sky-600/10 rounded-xl px-2 py-1 text-white z-10"
               >
                 <option value="easy">Easy · 10 XP</option>
                 <option value="medium">Medium · 15 XP</option>
@@ -119,21 +123,21 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
               </select>
               <button
                 onClick={() => move(i, -1)}
-                className="px-2 text-slate-400"
+                className="px-2  text-blue-400"
               >
-                ↑
+                <ChevronsUp />
               </button>
               <button
                 onClick={() => move(i, 1)}
-                className="px-2 text-slate-400"
+                className="px-2 text-blue-400"
               >
-                ↓
+                <ChevronsDown />
               </button>
               <button
                 onClick={() => remove(i)}
-                className="ml-auto text-red-400"
+                className="ml-auto "
               >
-                Delete
+                <Trash className="w-[20px] h-[20px] text-rose-700" />
               </button>
             </div>
           </div>

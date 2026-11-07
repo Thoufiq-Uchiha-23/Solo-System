@@ -75,7 +75,7 @@ export default async function ProfilePage() {
 
   return (
     <div
-      className="h-auto text-white bg-[#020c1f]"
+      className="h-auto text-white bg-[#020c1f] overflow-x-hidden"
       // style={{
       //   backgroundImage: user.banner ? `url('${user.banner}')` : undefined,
       //   backgroundSize: "cover",
@@ -85,11 +85,11 @@ export default async function ProfilePage() {
     >
       {/* Black Overlay */}
       <div className="inset-0 bg-black/60"></div>
-      <div className="mx-auto px-20 pb-8 pt-[100px]">
+      <div className="mx-auto px-20 pb-8 pt-[150px]">
         {/* Back Button */}
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-2 font-aeo text-slate-400 hover:text-amber-400 transition-colors mb-6"
+          className="inline-flex items-center gap-2 font-aeo text-blue-700 hover:text-blue-400 transition-colors mb-6 duration-300"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Dashboard
