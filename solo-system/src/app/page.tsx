@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth"; // adjust to wherever your NextAuth v5 `auth` export lives
@@ -20,20 +20,20 @@ export const metadata: Metadata = {
     "Break any goal into quests, earn XP for every one you finish, and rank up from E to S. AI-generated quests and video guides included.",
 };
 
-const steps = [
-  {
-    title: "Set a goal",
-    body: "Name what you want to achieve. Solo System also finds starter YouTube videos for it right away.",
-  },
-  {
-    title: "Generate your quests",
-    body: "AI drafts a list of quests for the goal. Edit, add or remove any of them before they are saved.",
-  },
-  {
-    title: "Finish quests, earn XP",
-    body: "Each completed quest gives XP. Finish them all and the goal completes with a bonus.",
-  },
-];
+// const steps = [
+//   {
+//     title: "Set a goal",
+//     body: "Name what you want to achieve. Solo System also finds starter YouTube videos for it right away.",
+//   },
+//   {
+//     title: "Generate your quests",
+//     body: "AI drafts a list of quests for the goal. Edit, add or remove any of them before they are saved.",
+//   },
+//   {
+//     title: "Finish quests, earn XP",
+//     body: "Each completed quest gives XP. Finish them all and the goal completes with a bonus.",
+//   },
+// ];
 
 const showcase = [
   {
@@ -86,25 +86,25 @@ const showcase = [
   },
 ];
 
-const extras = [
-  {
-    title: "Always know what is next",
-    body: "The next quest in line is marked “Up Next”, so you never wonder where to start. It is a nudge, not a lock, so you can still tackle quests in any order.",
-  },
-  {
-    title: "A profile worth showing",
-    body: "Set a banner and profile picture, add your social links, and keep a list of every goal you have completed.",
-  },
-];
+// const extras = [
+//   {
+//     title: "Always know what is next",
+//     body: "The next quest in line is marked “Up Next”, so you never wonder where to start. It is a nudge, not a lock, so you can still tackle quests in any order.",
+//   },
+//   {
+//     title: "A profile worth showing",
+//     body: "Set a banner and profile picture, add your social links, and keep a list of every goal you have completed.",
+//   },
+// ];
 
-const ranks = [
-  { letter: "E" },
-  { letter: "D" },
-  { letter: "C" },
-  { letter: "B" },
-  { letter: "A" },
-  { letter: "S" },
-];
+// const ranks = [
+//   { letter: "E" },
+//   { letter: "D" },
+//   { letter: "C" },
+//   { letter: "B" },
+//   { letter: "A" },
+//   { letter: "S" },
+// ];
 
 const faqs = [
   {
@@ -133,24 +133,13 @@ const faqs = [
   },
 ];
 
-function Check() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 20 20"
-      className="mt-1 h-5 w-5 flex-none text-amber-300"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 10.5l4 4 8-9" />
-    </svg>
-  );
-}
-
-function Frame({ src, alt }: { src: string; alt: string }) {
+function Frame({
+  src,
+  alt,
+}: {
+  src: string | StaticImageData;
+  alt: string;
+}) {
   return (
     <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
       <Image
@@ -163,11 +152,6 @@ function Frame({ src, alt }: { src: string; alt: string }) {
     </div>
   );
 }
-
-const primaryBtn =
-  "inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#2355c1] to-[#042469] px-6 py-3 font-semibold text-white shadow-lg shadow-blue-900/40 ring-1 ring-white/15 transition hover:brightness-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400";
-const ghostBtn =
-  "inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white backdrop-blur-xl transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400";
 
 export default async function LandingPage() {
   const session = await auth();

@@ -145,7 +145,7 @@ export default async function ProfilePage() {
                     updateProfileAction={updateProfile}
                   />
                 </div>
-                <div className="text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-vega font-semibold uppercase tracking-widest font-vega">
+                <div className="text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
                   Level {user.level}
                 </div>
               </div>
