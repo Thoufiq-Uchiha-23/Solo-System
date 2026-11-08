@@ -95,26 +95,6 @@ const showcase: ShowcaseItem[] = [
   },
 ];
 
-// const extras = [
-//   {
-//     title: "Always know what is next",
-//     body: "The next quest in line is marked “Up Next”, so you never wonder where to start. It is a nudge, not a lock, so you can still tackle quests in any order.",
-//   },
-//   {
-//     title: "A profile worth showing",
-//     body: "Set a banner and profile picture, add your social links, and keep a list of every goal you have completed.",
-//   },
-// ];
-
-// const ranks = [
-//   { letter: "E" },
-//   { letter: "D" },
-//   { letter: "C" },
-//   { letter: "B" },
-//   { letter: "A" },
-//   { letter: "S" },
-// ];
-
 const faqs = [
   {
     q: "Is Solo System free?",
@@ -141,26 +121,6 @@ const faqs = [
     a: "Use your Google account, or register with an email and password.",
   },
 ];
-
-// function Frame({
-//   src,
-//   alt,
-// }: {
-//   src: string | StaticImageData;
-//   alt: string;
-// }) {
-//   return (
-//     <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
-//       <Image
-//         src={src}
-//         alt={alt}
-//         width={1600}
-//         height={1000}
-//         className="rounded-2xl"
-//       />
-//     </div>
-//   );
-// }
 
 export default async function LandingPage() {
   const session = await auth();
@@ -194,14 +154,14 @@ export default async function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="/register"
-                className="px-8 py-4 text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
+                className="px-4 md:px-8 py-4 text-lg md:text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 Start Your Journey
               </Link>
 
               <Link
                 href="/login"
-                className="px-8 py-4 text-xl font-extralight font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
+                className="px-4 md:px-8 py-4 text-lg md:text-xl font-medium font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
               >
                 Already a Hunter?
               </Link>
@@ -211,19 +171,19 @@ export default async function LandingPage() {
       </div>
       <div className="relative mx-auto px-6">
         {/* HERO */}
-        <section className="flex-col items-center gap-12 py-20 w-full px-20">
-          <div className="mx-auto max-w-3xl text-center px-10 py-20">
-            <h1 className="font-vega text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+        <section className="flex-col items-center gap-12 py-10 md:py-20 w-full md:px-20">
+          <div className="mx-auto w-full md:max-w-3xl text-center md:px-10 md:py-20">
+            <h1 className="font-vega text-4xl font-bold leading-tight md:text-6xl">
               Turn your goals into quests, and level up for real.
             </h1>
-            <p className="font-sato mt-6 text-lg text-zinc-300 text-center">
+            <p className="font-sato mt-6 text-lg md:text-xl text-white/50 text-center">
               Solo System breaks any goal into quests you can finish, gives you
               XP for every one, and ranks you up from E to S.
             </p>
           </div>
 
-          <div className="px-20">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+          <div className="px-0 md:px-10 py-10">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-0.5 md:p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
               <Image
                 src={dashPic}
                 alt="Solo System dashboard showing goals, level and XP"
@@ -234,11 +194,11 @@ export default async function LandingPage() {
         </section>
 
         {/* FEATURES */}
-        <section className="py-16 px-20">
-          <h2 className="font-vega text-4xl text-center font-bold sm:text-5xl lg:text-6xl">
+        <section className="py-10 md:py-20 md:px-20">
+          <h2 className="font-vega text-4xl text-center font-bold md:text-6xl px-10 md:px-0">
             Less planning. More doing.
           </h2>
-          <p className="font-sato mt-3 text-lg text-center text-slate-300">
+          <p className="font-sato mt-3 text-lg md:text-xl text-center text-zinc-300">
             Four tools that take you from a vague goal to finished work, and
             reward you on the way.
           </p>
@@ -252,16 +212,16 @@ export default async function LandingPage() {
                   className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
                 >
                   <div className={flip ? "lg:order-2" : ""}>
-                    <h3 className="font-sato text-2xl font-semibold sm:text-5xl">
+                    <h3 className="font-sato text-2xl font-semibold md:text-5xl">
                       {f.title}
                     </h3>
-                    <p className="font-sato mt-4 max-w-lg text-xl text-slate-300">
+                    <p className="font-sato mt-4 md:max-w-lg text-lg md:text-xl text-slate-300">
                       {f.body}
                     </p>
                     <ul className="font-sato font-light mt-6 space-y-3 text-slate-200">
                       {f.points.map((p) => (
                         <li key={p} className="flex items-center gap-3">
-                          <ChevronsRight className="w-4 h-4 text-blue-400" />
+                          <ChevronsRight className="w-10 h-10 md:w-4 md:h-4 text-blue-400" />
                           <span>{p}</span>
                         </li>
                       ))}
@@ -274,8 +234,7 @@ export default async function LandingPage() {
                       aria-hidden
                       className={`absolute -inset-6 -z-10 rounded-full blur-3xl ${f.glow}`}
                     />
-                    {/* <Frame src={f.image} alt={f.alt} /> */}
-                    <div className="rounded-3xl border border-white/10 bg-white/5 p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
+                    <div className="rounded-3xl border border-white/10 bg-white/5 p-0.5 md:p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
                       <Image
                         src={f.image}
                         alt={f.title}
@@ -322,13 +281,15 @@ export default async function LandingPage() {
         </section> */}
 
         {/* FAQ */}
-        <section className="py-16 px-20">
-          <h2 className="font-vega text-6xl text-center font-bold">FAQ</h2>
-          <div className="mt-10 px-20 space-y-3">
+        <section className="py-10 md:py-16 md:px-20">
+          <h2 className="font-vega text-4xl md:text-6xl text-center font-bold">
+            FAQ
+          </h2>
+          <div className="mt-10 md:px-20 space-y-3">
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-2xl border-[.2px] border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl open:bg-white/10"
+                className="group rounded-2xl border-[.2px] border-white/10 bg-white/5 px-2 md:px-6 py-4 backdrop-blur-xl open:bg-white/10"
               >
                 <summary className="font-sato flex cursor-pointer list-none items-center justify-between gap-4 text-xl transition-all active::scale-95 duration-300 font-semibold [&::-webkit-details-marker]:hidden">
                   {f.q}
@@ -346,26 +307,26 @@ export default async function LandingPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-16 px-20">
+        <section className="py-10 md:py-16 md:px-20">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#2355c1]/30 to-[#042469]/30 p-10 text-center backdrop-blur-xl sm:p-16">
-            <h2 className="font-vega text-3xl font-bold sm:text-4xl lg:text-6xl">
+            <h2 className="font-vega text-4xl md:text-6xl font-bold">
               Your first quest is one goal away
             </h2>
-            <p className="font-sato mx-auto mt-4 font-extralight text-2xl text-slate-300">
+            <p className="font-sato mx-auto mt-4 font-extralight text-lg md:text-2xl text-slate-300">
               Create an account, add a goal, and let Solo System draft the
               quests.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="/register"
-                className="px-8 py-4 text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
+                className="px-4 md:px-8 py-4 text-lg md:text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 Join Now
               </Link>
 
               <Link
                 href="/login"
-                className="px-8 py-4 text-xl font-extralight font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
+                className="px-4 md:px-8 py-4 text-lg md:text-xl font-extralight font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
               >
                 Login Here
               </Link>
@@ -374,7 +335,7 @@ export default async function LandingPage() {
         </section>
 
         {/* FOOTER */}
-        <footer className="font-sato flex flex-wrap items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-slate-400">
+        <footer className="font-sato flex flex-wrap items-center justify-center md:justify-between gap-4 border-t border-white/10 py-8 text-sm md:text-lg text-slate-400">
           <p>Built by Thoufiq. Inspired by Solo Leveling.</p>
           <p>Solo System &copy; 2026. Level up your real life.</p>
         </footer>

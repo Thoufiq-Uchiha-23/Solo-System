@@ -82,7 +82,7 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
   }
 
   return (
-    <div className="rounded-lg p-4 mb-8 font-aeo">
+    <div className="rounded-lg md:p-4 mb-8 font-aeo">
       <p className="text-slate-400 text-sm mb-4">
         Edit anything you want, then save. Nothing is added until you press
         Save.
@@ -92,20 +92,20 @@ export default function AiQuestPlanner({ goalId }: { goalId: string }) {
         {draft.map((q, i) => (
           <div
             key={i}
-            className="bg-blue-900/30 relative backdrop-blur-2xl rounded-lg p-3 space-y-2"
+            className="bg-blue-900/30 relative backdrop-blur-2xl rounded-lg p-1.5 md:p-3 space-y-2"
           >
             <input
               value={q.title}
               onChange={(e) => update(i, { title: e.target.value })}
               placeholder="Quest title"
-              className="w-full bg-sky-600/10 rounded-xl px-3 py-2 text-white z-20"
+              className="w-full bg-sky-600/10 rounded-xl px-3 py-2 text-white text-sm"
             />
             <textarea
               value={q.description ?? ""}
               onChange={(e) => update(i, { description: e.target.value })}
               placeholder="Description (optional)"
               rows={2}
-              className="w-full bg-sky-600/10 rounded-xl px-3 py-2 text-white text-sm z-10"
+              className="w-full h-24 md:h-auto bg-sky-600/10 rounded-xl px-3 py-2 text-white text-sm"
             />
             <div className="flex items-center gap-2 text-sm">
               <select

@@ -24,7 +24,7 @@ export default function RefreshVideosButton({ goalId }: { goalId: string }) {
       <button
         onClick={refresh}
         disabled={pending}
-        className="text-sm text-slate-300 hover:text-white border border-slate-700 rounded-full px-4 py-2 disabled:opacity-50"
+        className="text-sm text-slate-300 hover:text-white border border-slate-700 rounded-full px-2 py-1 md:px-4 md:py-2 disabled:opacity-50"
       >
         {pending ? "Refreshing..." : "↻ Refresh videos"}
       </button>

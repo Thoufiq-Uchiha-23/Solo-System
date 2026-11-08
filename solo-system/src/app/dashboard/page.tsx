@@ -52,24 +52,24 @@ export default async function DashboardPage() {
   const progressPercent = (current / needed) * 100;
 
   return (
-    <div className="h-auto text-white bg-[#030d25] px-10 py-10">
-      <div className="max-w-3xl mx-auto px-4 py-8 mt-[100px]">
+    <div className="h-auto text-white bg-[#030d25] px-7 md:px-10 py-10">
+      <div className="max-w-3xl mx-auto pb-4 pt-[70px] md:pt-[100px]">
         {/* Header */}
         <div className="">
-          <h1 className="text-4xl font-bold tracking-tight mb-1 font-vega">
+          <h1 className="text-4xl font-bold tracking-tight pb-4 font-vega">
             Level up your goals
           </h1>
           {/* <p className="text-slate-400">Level up your goals</p> */}
         </div>
 
         {/* Level Card */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 mb-8">
+        <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-3 md:p-6 mb-8">
           <div className="flex items-center justify-between mb-4 font-vega text-white">
             <div>
               <div className="text-sm font-medium uppercase tracking-wider">
                 Level
               </div>
-              <div className="text-5xl font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
                 {user.level}
               </div>
             </div>
@@ -77,14 +77,14 @@ export default async function DashboardPage() {
               <div className="text-sm font-medium uppercase tracking-wider">
                 Rank
               </div>
-              <div className="text-5xl font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
+              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
                 {rank}
               </div>
             </div>
           </div>
 
           {/* XP Progress Bar */}
-          <div className="space-y-2 font-aeo text-white">
+          <div className="space-y-1 md:space-y-2 font-aeo text-white">
             <div className="flex justify-between text-xs">
               <span>XP Progress</span>
               <span>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
 
         {/* Goals Section */}
         <div className="mt-12">
-          <h2 className="text-4xl font-bold font-vega mb-4">Your Goals</h2>
+          <h2 className="text-4xl font-bold font-vega pb-4">Your Goals</h2>
 
           {goals.length === 0 ? (
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 text-center">

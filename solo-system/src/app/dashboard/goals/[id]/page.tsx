@@ -111,12 +111,12 @@ export default async function GoalDetailPage({
   const totalQuests = goal.quests.length;
 
   return (
-    <div className="h-auto bg-slate-950 text-white mt-[100px]">
+    <div className="h-auto bg-slate-950 text-white pt-[70px] md:pt-[100px]">
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-amber-400 transition-colors mb-6"
+          className="font-sato inline-flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors mb-6"
         >
           <ChevronLeft className="w-4 h-4" />
           Back to Dashboard
@@ -124,7 +124,7 @@ export default async function GoalDetailPage({
 
         {/* Goal Header */}
         <div className="mb-8 font-aeo">
-          <h1 className="text-4xl font-bold capitalize mb-2">{goal.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold capitalize mb-2">{goal.title}</h1>
           {goal.description && (
             <p className="text-slate-400 text-lg">{goal.description}</p>
           )}
@@ -132,13 +132,13 @@ export default async function GoalDetailPage({
 
         {/* Progress Bar */}
         {totalQuests > 0 && (
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 mb-8">
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-4 md:p-6 mb-8">
             <div className="flex justify-between items-end mb-4 font-vega text-white">
               <div>
-                <div className="text-xl uppercase tracking-wider font-medium">
+                <div className="text-lg md:text-xl uppercase tracking-wider font-medium">
                   Quest Progress
                 </div>
-                <div className="text-5xl font-aeo font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
+                <div className="text-4xl md:text-5xl font-aeo font-bold bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent">
                   {completedCount} / {totalQuests}
                 </div>
               </div>
@@ -162,18 +162,18 @@ export default async function GoalDetailPage({
         {/* Add Quest Form */}
         <form
           action={addQuestWithGoal}
-          className="bg-slate-900 rounded-lg font-aeo p-4 mb-8"
+          className="bg-slate-900 rounded-lg font-aeo p-2 md:p-4 mb-8"
         >
-          <div className="flex gap-2">
+          <div className="flex gap-1 flex-wrap md:gap-2">
             <input
               name="title"
               placeholder="Quest title"
               required
-              className="flex-1 bg-slate-800 rounded-3xl px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-[#2355c1] focus:ring-2 focus:ring-amber-500/20 transition-colors"
+              className="flex-1 bg-slate-800 rounded-3xl px-1.5 py-1 md:px-3 md:py-2 text-white placeholder-slate-500 focus:outline-none focus:border-[#2355c1] transition-colors"
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold px-4 py-2 rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
+              className="bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold md:text-lg px-2 md:px-4 py-2 rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
             >
               Add Quest
             </button>
@@ -182,14 +182,14 @@ export default async function GoalDetailPage({
 
         {/* Quests Section */}
         <div>
-          <h2 className="text-4xl font-bold mb-6 font-vega uppercase">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-vega uppercase">
             Quests
           </h2>
 
           {goal.quests.length === 0 ? (
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-8 text-center">
               <p className="text-slate-400">
-                No quests yet — add one above to get started.
+                No quests yet - add one above to get started.
               </p>
             </div>
           ) : (
@@ -203,7 +203,7 @@ export default async function GoalDetailPage({
                 return (
                   <div
                     key={quest.id}
-                    className={`rounded-lg p-4 transition-all flex items-center justify-between ${
+                    className={`rounded-lg p-2 md:p-4 transition-all flex items-center justify-between ${
                       isCompleted
                         ? "bg-slate-900/50 border-slate-700 opacity-60"
                         : "bg-slate-900 border-slate-700 hover:border-amber-500/50"
@@ -212,7 +212,7 @@ export default async function GoalDetailPage({
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-1">
                         {isUpNext && (
-                          <span className="py-1 px-5 border-[0.3px] border-solid border-white/30 bg-[#042469]/30 text-white/40 text-xs rounded-3xl font-extralight">
+                          <span className="flex py-1 px-5 border-[0.3px] border-solid border-white/30 bg-[#042469]/30 text-white/40 text-xs rounded-3xl font-extralight">
                             <ChevronsRight className="w-4 h-4" />
                             Up Next
                           </span>
@@ -230,7 +230,7 @@ export default async function GoalDetailPage({
                         {quest.title}
                       </h3>
                       {quest.description && (
-                        <p className="text-slate-500 text-sm mt-1">
+                        <p className="text-slate-500 text-sm pt-1">
                           {quest.description}
                         </p>
                       )}
@@ -239,7 +239,7 @@ export default async function GoalDetailPage({
                     {!isCompleted && (
                       <form
                         action={completeQuest.bind(null, quest.id, goal.id)}
-                        className="ml-4 shrink-0"
+                        className="pl-4 shrink-0"
                       >
                         <button
                           type="submit"
@@ -258,9 +258,9 @@ export default async function GoalDetailPage({
       </div>
 
       {/* YOUTUBE RECOMMENDATIONS VIDEOS */}
-      <div className="mt-10 font-aeo py-10 px-20">
+      <div className="md:mt-10 font-aeo px-5 py-7 md:py-10 md:px-20">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-4xl font-bold font-vega uppercase">Resources</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-vega uppercase">Resources</h2>
           <RefreshVideosButton goalId={goal.id} />
         </div>
 
@@ -269,14 +269,14 @@ export default async function GoalDetailPage({
             No videos yet. Press refresh to find some.
           </p>
         ) : (
-          <div className="grid grid-cols-2 grid-rows-4 gap-7">
+          <div className="grid grid-cols-1 grid-rows-6 md:grid-cols-2 md:grid-rows-4 gap-2 md:gap-7">
             {videos.map((v) => (
               <a
                 key={v.id}
                 href={`https://www.youtube.com/watch?v=${v.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#2355c1]/10 flex w-full h-[200px] rounded-lg overflow-hidden hover:bg-[#2355c1]/20 transition-all transform hover:scale-105 active:scale-95 duration-300"
+                className="bg-[#2355c1]/10 flex flex-wrap md:flex-nowrap w-full h-auto md:h-[200px] rounded-lg overflow-hidden hover:bg-[#2355c1]/20 transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -285,8 +285,8 @@ export default async function GoalDetailPage({
                   className="w-full aspect-video object-cover"
                 />
                 <div className="p-3 w-full">
-                  <p className="text-xl text-white line-clamp-2">{v.title}</p>
-                  <p className="text-lg mb-auto text-slate-500">{v.channel}</p>
+                  <p className="text-lg md:text-xl text-white line-clamp-2">{v.title}</p>
+                  <p className="text-sm md:text-lg mb-auto text-slate-500">{v.channel}</p>
                 </div>
               </a>
             ))}
