@@ -218,7 +218,7 @@ export default async function GoalDetailPage({
                           </span>
                         )}
                         {isCompleted && (
-                          <span className="py-1 px-5 bg-green-500/20 border border-green-500/50 text-white/40 text-xs rounded-3xl font-extralight">
+                          <span className="flex py-1 px-5 bg-green-500/20 border border-green-500/50 text-white/40 text-xs rounded-3xl font-extralight">
                             <Check className="w-4 h-4" />
                             Complete
                           </span>
