@@ -22,34 +22,34 @@ export function ProfileMetrics({
     <>
       {/* Weekly Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-[#010f2d] rounded-xl p-6 backdrop-blur-xl">
+        <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">XP This Week</div>
           <div className="text-4xl font-semibold font-aeo">{totalXpThisWeek}</div>
           <div className="text-xs text-slate-500 mt-2">+{Math.round(totalXpThisWeek / 7)}/day avg</div>
         </div>
 
-        <div className="bg-[#010f2d] rounded-xl p-6 backdrop-blur-xl">
+        <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">Goals Completed</div>
           <div className="text-4xl font-semibold font-aeo">{goalsCompleted}</div>
           <div className="text-xs text-slate-500 mt-2">This week</div>
         </div>
 
-        <div className="bg-[#010f2d] rounded-xl p-6 backdrop-blur-xl">
+        <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">Streak</div>
           <div className="text-4xl font-semibold font-aeo">{streak}</div>
           <div className="text-xs text-slate-500 mt-2">Day{streak !== 1 ? 's' : ''}</div>
         </div>
 
-        <div className="bg-[#010f2d] rounded-xl p-6 backdrop-blur-xl flex flex-col items-center justify-center">
+        <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl flex flex-col items-center justify-center">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">Quests</div>
           <CircularProgress current={questsCompleted} total={Math.max(questsCompleted + 3, 5)} label="Quests" />
         </div>
       </div>
 
       {/* Weekly Chart */}
-      <div className="bg-[#010f2d] rounded-xl p-6 mb-8 backdrop-blur-xl">
+      <div className="bg-[#010f2d] rounded-xl p-3 md:p-6 mb-8 backdrop-blur-xl">
         <h3 className="text-[#2355c1] text-3xl font-vega mb-4">XP by Day</h3>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer className="rounded-xl md:px-40" width="100%" height={300}>
           <BarChart data={dailyXp}>
             <XAxis dataKey="day" stroke="rgb(148, 163, 184)" />
             <YAxis stroke="rgb(148, 163, 184)" />

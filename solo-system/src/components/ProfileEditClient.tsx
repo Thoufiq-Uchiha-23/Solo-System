@@ -62,7 +62,7 @@ export function ProfileEditClient({
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="px-6 py-2 font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
+        className="px-3 md:px-6 py-2 text-sm md:text-lg font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
       >
         Edit Profile
       </button>

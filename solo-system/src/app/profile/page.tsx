@@ -85,7 +85,7 @@ export default async function ProfilePage() {
     >
       {/* Black Overlay */}
       <div className="inset-0 bg-black/60"></div>
-      <div className="mx-auto px-20 pb-8 pt-[150px]">
+      <div className="mx-auto px-6 pb-16 md:px-20 md:pb-8 pt-[70px] md:pt-[150px]">
         {/* Back Button */}
         <Link
           href="/dashboard"
@@ -98,7 +98,7 @@ export default async function ProfilePage() {
         {/* Banner & Profile Hero Section */}
         <div className="mb-8 rounded-xl overflow-hidden">
           {/* Banner */}
-          <div className="relative h-[200px] overflow-hidden">
+          <div className="relative h-auto md:h-[200px] overflow-hidden">
             {user.banner ? (
               <img
                 src={user.banner}
@@ -111,41 +111,44 @@ export default async function ProfilePage() {
           </div>
 
           {/* Profile Info Overlapping Banner */}
-          <div className="bg-[#010f2d] px-6 pb-6 pt-0">
-            <div className="flex items-end gap-6 py-2">
-              {/* Profile Image */}
-              <div className="relative">
-                {user.image ? (
-                  <img
-                    src={user.image}
-                    alt={user.name ?? "Profile"}
-                    className="w-[150px] h-[150px] rounded-lg object-cover"
-                  />
-                ) : (
-                  <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-[#2355c1] to-[#042469] flex items-center justify-center text-5xl font-bold border-4 border-slate-900">
-                    {(user.name || "H").charAt(0)}
-                  </div>
-                )}
-              </div>
+          <div className="bg-[#010f2d] px-3 md:px-6 pb-6 pt-0">
+            <div className="flex justify-between flex-wrap gap-3 md:gap-4 py-2">
+              <div className="flex items-center gap-4">
+                {/* Profile Image */}
+                <div className="relative">
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name ?? "Profile"}
+                      className="w-[70px] h-[70px] md:w-[150px] md:h-[150px] rounded-lg object-cover"
+                    />
+                  ) : (
+                    <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-[#2355c1] to-[#042469] flex items-center justify-center text-5xl font-bold border-4 border-slate-900">
+                      {(user.name || "H").charAt(0)}
+                    </div>
+                  )}
+                </div>
 
-              {/* Name & Email */}
-              <div className="flex-1 pb-2">
-                <h1 className="text-5xl font-semibold font-sato uppercase mb-1">
-                  {user.name || "Hunter"}
-                </h1>
-                <p className="text-slate-400 text-sm font-aeo">{user.email}</p>
+                {/* Name & Email */}
+                <div className="flex-1 pb-2">
+                  <h1 className="text-3xl md:text-5xl font-semibold font-sato uppercase mb-1">
+                    {user.name || "Hunter"}
+                  </h1>
+                  <p className="text-slate-400 text-sm font-aeo">
+                    {user.email}
+                  </p>
+                </div>
               </div>
-
               {/* Level & Rank Badge */}
-              <div className="text-right pb-2">
+              <div className="md:text-right pb-2">
                 {/* Edit Profile Button */}
-                <div className="mb-8">
+                <div className="pb-8">
                   <ProfileEditClient
                     user={{ ...user, socialLinks }}
                     updateProfileAction={updateProfile}
                   />
                 </div>
-                <div className="text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
+                <div className="text-4xl md:text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
                   Level {user.level}
                 </div>
               </div>
@@ -167,27 +170,59 @@ export default async function ProfilePage() {
               </div>
             </div>
 
+            {/* Social Links Section */}
+            {socialLinks.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold font-vega mb-4">
+                  Social Links
+                </h2>
+                <div className="space-y-2">
+                  {socialLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block bg-slate-900 border border-slate-700 rounded-lg p-4 hover:border-amber-500/50 transition-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-aeo text-white">
+                          {link.platform}
+                        </span>
+                        <span className="text-slate-400 text-sm">→</span>
+                      </div>
+                      <p className="text-sm text-slate-400 mt-1 break-all">
+                        {link.url}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Quick Stats Grid */}
-            <div className="grid grid-cols-3 gap-3 ">
-              <div className="bg-blue-700/5 rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-4xl font-vega mb-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
+              <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
+                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
                   Rank
                 </div>
-                <div className="text-4xl font-semibold  font-aeo">{rank}</div>
+                <div className="text-3xl md:text-4xl font-semibold  font-aeo">
+                  {rank}
+                </div>
               </div>
-              <div className="bg-blue-700/5 rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-4xl font-vega mb-1">
+              <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
+                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
                   Total XP
                 </div>
-                <div className="text-4xl font-semibold font-aeo">
+                <div className="text-3xl md:text-4xl font-semibold font-aeo">
                   {user.totalXp.toLocaleString()}
                 </div>
               </div>
-              <div className="bg-blue-700/5 rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-4xl font-vega mb-1">
+              <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
+                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
                   Goals Done
                 </div>
-                <div className="text-4xl font-semibold font-aeo">
+                <div className="text-3xl md:text-4xl font-semibold font-aeo">
                   {completedGoals}
                 </div>
               </div>
@@ -203,69 +238,10 @@ export default async function ProfilePage() {
           dailyXp={metrics.dailyXp}
         />
 
-        {/* Additional Stats */}
-        <div className="bg-[#010f2d] rounded-lg p-4 mb-8">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <div className="text-[#2355c1] text-4xl font-vega mb-1">
-                In Progress
-              </div>
-              <div className="text-2xl font-bold font-aeo">
-                {inProgressGoals}
-              </div>
-            </div>
-            <div>
-              <div className="text-[#2355c1] text-4xl font-vega mb-1">
-                Member Since
-              </div>
-              <div className="text-2xl font-aeo">
-                {new Date(user.createdAt).toLocaleDateString()}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Logout Button */}
-        {/* <form action={handleLogout} className="mb-12">
-          <button
-            type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-red-600/20 border border-red-600/50 hover:bg-red-600/30 text-red-400 font-semibold py-3 rounded-lg transition-all"
-          >
-            <LogOut className="w-4 h-4" />
-            Log Out
-          </button>
-        </form> */}
-
-        {/* Social Links Section */}
-        {socialLinks.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold font-vega mb-4">Social Links</h2>
-            <div className="space-y-2">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-slate-900 border border-slate-700 rounded-lg p-4 hover:border-amber-500/50 transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-aeo text-white">{link.platform}</span>
-                    <span className="text-slate-400 text-sm">→</span>
-                  </div>
-                  <p className="text-sm text-slate-400 mt-1 break-all">
-                    {link.url}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Completed Goals Section */}
         {goals.some((g) => g.status === "COMPLETED") && (
-          <div>
-            <h2 className="text-2xl font-bold font-vega mb-4">
+          <div className="py-8">
+            <h2 className="text-3xl font-bold font-vega mb-4">
               Completed Goals
             </h2>
             <div className="space-y-3">
@@ -274,11 +250,11 @@ export default async function ProfilePage() {
                 .map((goal) => (
                   <div
                     key={goal.id}
-                    className="bg-slate-900 border border-slate-700 rounded-lg p-4"
+                    className="bg-white/10 rounded-2xl hover:scale-105 duration-300 p-3 md:p-4"
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-white line-through opacity-75">
+                      <div className="flex-1 font-aeo font-light">
+                        <h3 className="text-white line-through opacity-75">
                           {goal.title}
                         </h3>
                         {goal.description && (
@@ -296,6 +272,28 @@ export default async function ProfilePage() {
             </div>
           </div>
         )}
+
+        {/* Additional Stats */}
+        <div className="bg-[#010f2d] rounded-lg p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex justify-between md:flex-col">
+              <div className="text-[#2355c1] text-2xl md:text-4xl font-vega mb-1">
+                In Progress
+              </div>
+              <div className="text-xl md:text-3xl font-aeo">
+                {inProgressGoals}
+              </div>
+            </div>
+            <div className="flex justify-between md:flex-col">
+              <div className="text-[#2355c1] text-2xl md:text-4xl font-vega mb-1">
+                Member Since
+              </div>
+              <div className="text-xl md:text-3xl font-aeo">
+                {new Date(user.createdAt).toLocaleDateString()}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
