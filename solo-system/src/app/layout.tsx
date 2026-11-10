@@ -4,7 +4,6 @@ import "./globals.css";
 import SessionWrapper from "@/components/SessionWrapper";
 import Navbar from "@/components/Navbar";
 import localFont from "next/font/local";
-import Nav3 from "@/components/Nav2";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,7 +65,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SessionWrapper>
           <Navbar />
-          {/* <Nav3 /> */}
           {children}
         </SessionWrapper>
       </body>
