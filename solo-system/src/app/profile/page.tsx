@@ -4,7 +4,7 @@ import { getRank, xpProgressInCurrentLevel } from "@/lib/leveling";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { ChevronLeft, LogOut } from "lucide-react";
+import { ChevronLeft, LogOut, Link as Social } from "lucide-react";
 import { ProfileEditClient } from "@/components/ProfileEditClient";
 import { getWeeklyMetrics } from "@/lib/metrics";
 // import { CircularProgress } from "@/components/CircularProgress";
@@ -143,10 +143,12 @@ export default async function ProfilePage() {
               <div className="md:text-right pb-2">
                 {/* Edit Profile Button */}
                 <div className="pb-8">
-                  <ProfileEditClient
-                    user={{ ...user, socialLinks }}
-                    updateProfileAction={updateProfile}
-                  />
+                  <Link
+                    href="/profile/edit"
+                    className="px-3 md:px-6 py-2 text-sm md:text-lg font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
+                  >
+                    Edit Profile
+                  </Link>
                 </div>
                 <div className="text-4xl md:text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
                   Level {user.level}
@@ -172,29 +174,32 @@ export default async function ProfilePage() {
 
             {/* Social Links Section */}
             {socialLinks.length > 0 && (
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold font-vega mb-4">
+              <div className="pb-10">
+                <h2 className="text-2xl font-bold font-vega pb-4">
                   Social Links
                 </h2>
-                <div className="space-y-2">
+                <div className="flex items-center justify-start flex-wrap gap-4">
                   {socialLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block bg-slate-900 border border-slate-700 rounded-lg p-4 hover:border-amber-500/50 transition-all"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-aeo text-white">
-                          {link.platform}
-                        </span>
-                        <span className="text-slate-400 text-sm">→</span>
-                      </div>
-                      <p className="text-sm text-slate-400 mt-1 break-all">
-                        {link.url}
-                      </p>
-                    </a>
+                    <div className="bg-[#042469] p-2 rounded-lg" key={index}>
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex rounded-lg px-2 hover:border-blue-500/50 transition-all"
+                      >
+                        <div className="w-full">
+                          <h3 className="font-aeo text-white">
+                            {link.platform}
+                          </h3>
+                          <p className="text-sm text-slate-400 break-all">
+                            {link.url}
+                          </p>
+                        </div>
+
+                        <Social />
+                      </a>
+                    </div>
                   ))}
                 </div>
               </div>
