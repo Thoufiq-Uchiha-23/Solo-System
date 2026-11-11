@@ -24,19 +24,19 @@ export function ProfileMetrics({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">XP This Week</div>
-          <div className="text-4xl font-semibold font-aeo">{totalXpThisWeek}</div>
+          <div className="text-3xl lg:text-4xl font-semibold font-aeo">{totalXpThisWeek}</div>
           <div className="text-xs text-slate-500 mt-2">+{Math.round(totalXpThisWeek / 7)}/day avg</div>
         </div>
 
         <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">Goals Completed</div>
-          <div className="text-4xl font-semibold font-aeo">{goalsCompleted}</div>
+          <div className="text-3xl lg:text-4xl font-semibold font-aeo">{goalsCompleted}</div>
           <div className="text-xs text-slate-500 mt-2">This week</div>
         </div>
 
         <div className="bg-[#010f2d] rounded-xl p-4 md:p-6 backdrop-blur-xl">
           <div className="text-[#2355c1] text-3xl font-vega uppercase tracking-wider mb-4">Streak</div>
-          <div className="text-4xl font-semibold font-aeo">{streak}</div>
+          <div className="text-3xl lg:text-4xl font-semibold font-aeo">{streak}</div>
           <div className="text-xs text-slate-500 mt-2">Day{streak !== 1 ? 's' : ''}</div>
         </div>
 

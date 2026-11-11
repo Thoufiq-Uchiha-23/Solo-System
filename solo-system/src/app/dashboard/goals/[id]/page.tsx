@@ -112,7 +112,7 @@ export default async function GoalDetailPage({
 
   return (
     <div className="h-auto bg-slate-950 text-white pt-[70px] md:pt-[100px]">
-      <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="md:px-10 lg:max-w-2xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
           href="/dashboard"
@@ -258,7 +258,7 @@ export default async function GoalDetailPage({
       </div>
 
       {/* YOUTUBE RECOMMENDATIONS VIDEOS */}
-      <div className="md:mt-10 font-aeo px-5 py-7 md:py-10 md:px-20">
+      <div className="md:pt-10 font-aeo px-5 py-7 md:py-10 md:px-10 lg:px-20">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-3xl md:text-4xl font-bold font-vega uppercase">Resources</h2>
           <RefreshVideosButton goalId={goal.id} />
@@ -269,14 +269,14 @@ export default async function GoalDetailPage({
             No videos yet. Press refresh to find some.
           </p>
         ) : (
-          <div className="grid grid-cols-1 grid-rows-6 md:grid-cols-2 md:grid-rows-4 gap-2 md:gap-7">
+          <div className="grid grid-cols-1 grid-rows-6 md:grid-cols-2 md:grid-rows-3 gap-2 md:gap-4 lg:gap-7">
             {videos.map((v) => (
               <a
                 key={v.id}
                 href={`https://www.youtube.com/watch?v=${v.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#2355c1]/10 flex flex-wrap md:flex-nowrap w-full h-auto md:h-[200px] rounded-lg overflow-hidden hover:bg-[#2355c1]/20 transition-all transform hover:scale-105 active:scale-95 duration-300"
+                className="bg-[#2355c1]/10 flex flex-wrap xl:flex-nowrap w-full h-auto xl:h-[200px] rounded-lg overflow-hidden hover:bg-[#2355c1]/20 transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -285,8 +285,8 @@ export default async function GoalDetailPage({
                   className="w-full aspect-video object-cover"
                 />
                 <div className="p-3 w-full">
-                  <p className="text-lg md:text-xl text-white line-clamp-2">{v.title}</p>
-                  <p className="text-sm md:text-lg mb-auto text-slate-500">{v.channel}</p>
+                  <p className="text-lg lg:text-xl text-white line-clamp-2">{v.title}</p>
+                  <p className="text-sm lg:text-lg mb-auto text-slate-500">{v.channel}</p>
                 </div>
               </a>
             ))}

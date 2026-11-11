@@ -49,7 +49,7 @@ export function CircularProgress({
         </defs>
       </svg>
       <div className="text-center">
-        <div className="text-4xl font-semibold font-aeo">{current}</div>
+        <div className="text-3xl lg:text-4xl font-semibold font-aeo">{current}</div>
         <div className="uppercase tracking-wide text-md font-extralight font-aeo">{label}</div>
       </div>
     </div>

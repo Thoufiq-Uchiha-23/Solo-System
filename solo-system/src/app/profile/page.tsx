@@ -85,7 +85,7 @@ export default async function ProfilePage() {
     >
       {/* Black Overlay */}
       <div className="inset-0 bg-black/60"></div>
-      <div className="mx-auto px-6 pb-16 md:px-20 md:pb-8 pt-[70px] md:pt-[150px]">
+      <div className="mx-auto px-6 pb-16 md:px-10 lg:px-20 md:pb-8 pt-[70px] md:pt-[100px] lg:pt-[150px]">
         {/* Back Button */}
         <Link
           href="/dashboard"
@@ -98,7 +98,7 @@ export default async function ProfilePage() {
         {/* Banner & Profile Hero Section */}
         <div className="mb-8 rounded-xl overflow-hidden">
           {/* Banner */}
-          <div className="relative h-auto md:h-[200px] overflow-hidden">
+          <div className="relative h-auto md:h-[150px] lg:h-[200px] overflow-hidden">
             {user.banner ? (
               <img
                 src={user.banner}
@@ -120,7 +120,7 @@ export default async function ProfilePage() {
                     <img
                       src={user.image}
                       alt={user.name ?? "Profile"}
-                      className="w-[70px] h-[70px] md:w-[150px] md:h-[150px] rounded-lg object-cover"
+                      className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] lg:w-[150px] lg:h-[150px] rounded-lg object-cover"
                     />
                   ) : (
                     <div className="w-28 h-28 rounded-lg bg-gradient-to-br from-[#2355c1] to-[#042469] flex items-center justify-center text-5xl font-bold border-4 border-slate-900">
@@ -131,7 +131,7 @@ export default async function ProfilePage() {
 
                 {/* Name & Email */}
                 <div className="flex-1 pb-2">
-                  <h1 className="text-3xl md:text-5xl font-semibold font-sato uppercase mb-1">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold font-sato uppercase mb-1">
                     {user.name || "Hunter"}
                   </h1>
                   <p className="text-slate-400 text-sm font-aeo">
@@ -145,12 +145,12 @@ export default async function ProfilePage() {
                 <div className="pb-8">
                   <Link
                     href="/profile/edit"
-                    className="px-3 md:px-6 py-2 text-sm md:text-lg font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
+                    className="px-3 md:px-6 py-2 text-sm md:text-base lg:text-lg font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] text-white font-semibold rounded-l-3xl rounded-tr-3xl rounded-br-lg transition-all"
                   >
                     Edit Profile
                   </Link>
                 </div>
-                <div className="text-4xl md:text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
+                <div className="text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent font-semibold uppercase tracking-widest font-vega">
                   Level {user.level}
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default async function ProfilePage() {
                 </h2>
                 <div className="flex items-center justify-start flex-wrap gap-4">
                   {socialLinks.map((link, index) => (
-                    <div className="bg-[#042469] p-2 rounded-lg" key={index}>
+                    <div className="bg-[#042469] p-2 rounded-lg font-aeo" key={index}>
                       <a
                         key={index}
                         href={link.url}
@@ -189,7 +189,7 @@ export default async function ProfilePage() {
                         className="flex rounded-lg px-2 hover:border-blue-500/50 transition-all"
                       >
                         <div className="w-full">
-                          <h3 className="font-aeo text-white">
+                          <h3 className=" text-white">
                             {link.platform}
                           </h3>
                           <p className="text-sm text-slate-400 break-all">
@@ -208,26 +208,26 @@ export default async function ProfilePage() {
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
               <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
+                <div className="text-[#2355c1] text-3xl lg:text-4xl font-vega mb-1">
                   Rank
                 </div>
-                <div className="text-3xl md:text-4xl font-semibold  font-aeo">
+                <div className="text-3xl lg:text-4xl font-semibold  font-aeo">
                   {rank}
                 </div>
               </div>
               <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
+                <div className="text-[#2355c1] text-3xl lg:text-4xl font-vega mb-1">
                   Total XP
                 </div>
-                <div className="text-3xl md:text-4xl font-semibold font-aeo">
+                <div className="text-3xl lg:text-4xl font-semibold font-aeo">
                   {user.totalXp.toLocaleString()}
                 </div>
               </div>
               <div className="bg-blue-700/5 flex justify-between md:flex-col rounded-lg p-3 text-center">
-                <div className="text-[#2355c1] text-3xl md:text-4xl font-vega mb-1">
+                <div className="text-[#2355c1] text-3xl lg:text-4xl font-vega mb-1">
                   Goals Done
                 </div>
-                <div className="text-3xl md:text-4xl font-semibold font-aeo">
+                <div className="text-3xl lg:text-4xl font-semibold font-aeo">
                   {completedGoals}
                 </div>
               </div>
@@ -282,18 +282,18 @@ export default async function ProfilePage() {
         <div className="bg-[#010f2d] rounded-lg p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex justify-between md:flex-col">
-              <div className="text-[#2355c1] text-2xl md:text-4xl font-vega mb-1">
+              <div className="text-[#2355c1] text-2xl md:text-3xl lg:text-4xl font-vega mb-1">
                 In Progress
               </div>
-              <div className="text-xl md:text-3xl font-aeo">
+              <div className="text-xl lg:text-3xl font-aeo">
                 {inProgressGoals}
               </div>
             </div>
             <div className="flex justify-between md:flex-col">
-              <div className="text-[#2355c1] text-2xl md:text-4xl font-vega mb-1">
+              <div className="text-[#2355c1] text-2xl md:text-3xl lg:text-4xl font-vega mb-1">
                 Member Since
               </div>
-              <div className="text-xl md:text-3xl font-aeo">
+              <div className="text-xl lg:text-3xl font-aeo">
                 {new Date(user.createdAt).toLocaleDateString()}
               </div>
             </div>

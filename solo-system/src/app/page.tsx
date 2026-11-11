@@ -137,16 +137,16 @@ export default async function LandingPage() {
 
       <div className="h-auto bg-slate-950 text-white overflow-x-hidden">
         {/* Hero Section */}
-        <section className="relative z-10 mx-auto text-center pt-[70px] md:pt-[150px] px-10 md:px-20">
+        <section className="relative z-10 mx-auto text-center pt-[70px] md:pt-[100px] xl:pt-[150px] px-10 md:px-14 xl:px-20">
           <div className="space-y-8 py-20">
-            <h2 className="text-5xl md:text-7xl font-black font-vega leading-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black font-vega leading-tight">
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-600 bg-clip-text text-transparent">
                 Level Up
               </span>
               <br />
               <span className="text-white">Your Real Life</span>
             </h2>
-            <p className="text-lg md:text-xl text-white/50 font-aeo max-w-2xs md:max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-white/50 font-aeo max-w-2xs md:max-w-2xl mx-auto">
               Turn your goals into quests. Earn XP, gain ranks, and master your
               life like an RPG. Every goal completed is your next level.
             </p>
@@ -154,14 +154,14 @@ export default async function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <Link
                 href="/register"
-                className="px-4 md:px-8 py-4 text-lg md:text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
+                className="px-4 md:px-6 lg:px-8 py-4 text-lg lg:text-xl font-medium font-aeo bg-gradient-to-r from-[#2355c1] to-[#042469] hover:from-[#376cdf] hover:to-[#0740b9] rounded-l-3xl rounded-r-3xl rounded-bl-lg transition-all transform hover:scale-105 active:scale-95 duration-300"
               >
                 Start Your Journey
               </Link>
 
               <Link
                 href="/login"
-                className="px-4 md:px-8 py-4 text-lg md:text-xl font-medium font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
+                className="px-4 md:px-6 lg:px-8 py-4 text-lg lg:text-xl font-medium font-aeo border border-white/20 hover:border-white/40 rounded-l-3xl rounded-tr-3xl rounded-br-lg backdrop-blur-sm hover:bg-white/5 transition-all"
               >
                 Already a Hunter?
               </Link>
@@ -169,20 +169,20 @@ export default async function LandingPage() {
           </div>
         </section>
       </div>
-      <div className="relative mx-auto px-6">
+      <div className="relative mx-auto px-10">
         {/* HERO */}
-        <section className="flex-col items-center gap-12 py-10 md:py-20 w-full md:px-20">
+        <section className="flex-col items-center gap-12 py-10 lg:py-20 w-full xl:px-20">
           <div className="mx-auto w-full md:max-w-3xl text-center md:px-10 md:py-20">
-            <h1 className="font-vega text-4xl font-bold leading-tight md:text-6xl">
+            <h1 className="font-vega text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
               Turn your goals into quests, and level up for real.
             </h1>
-            <p className="font-sato mt-6 text-lg md:text-xl text-white/50 text-center">
+            <p className="font-sato mt-6 text-lg lg:text-xl text-white/50 text-center">
               Solo System breaks any goal into quests you can finish, gives you
               XP for every one, and ranks you up from E to S.
             </p>
           </div>
 
-          <div className="px-0 md:px-10 py-10">
+          <div className="px-0 xl:px-10 py-10">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-0.5 md:p-2 shadow-2xl shadow-blue-950/60 backdrop-blur-xl">
               <Image
                 src={dashPic}
@@ -194,11 +194,11 @@ export default async function LandingPage() {
         </section>
 
         {/* FEATURES */}
-        <section className="py-10 md:py-20 md:px-20">
-          <h2 className="font-vega text-4xl text-center font-bold md:text-6xl px-10 md:px-0">
+        <section className="py-10 lg:py-20 xl:px-20">
+          <h2 className="font-vega text-4xl text-center font-bold md:text-5xl lg:text-6xl px-10 md:px-0">
             Less planning. More doing.
           </h2>
-          <p className="font-sato mt-3 text-lg md:text-xl text-center text-zinc-300">
+          <p className="font-sato mt-3 text-lg lg:text-xl text-center text-zinc-300">
             Four tools that take you from a vague goal to finished work, and
             reward you on the way.
           </p>
@@ -212,10 +212,10 @@ export default async function LandingPage() {
                   className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
                 >
                   <div className={flip ? "lg:order-2" : ""}>
-                    <h3 className="font-sato text-2xl font-semibold md:text-5xl">
+                    <h3 className="font-sato text-2xl font-semibold md:text-3xl lg:text-4xl xl:text-5xl">
                       {f.title}
                     </h3>
-                    <p className="font-sato mt-4 md:max-w-lg text-lg md:text-xl text-slate-300">
+                    <p className="font-sato mt-4 md:max-w-lg text-lg xl:text-xl text-slate-300">
                       {f.body}
                     </p>
                     <ul className="font-sato font-light mt-6 space-y-3 text-slate-200">
@@ -281,11 +281,11 @@ export default async function LandingPage() {
         </section> */}
 
         {/* FAQ */}
-        <section className="py-10 md:py-16 md:px-20">
-          <h2 className="font-vega text-4xl md:text-6xl text-center font-bold">
+        <section className="py-10 md:py-16 xl:px-20">
+          <h2 className="font-vega text-4xl md:text-5xl lg:text-6xl text-center font-bold">
             FAQ
           </h2>
-          <div className="mt-10 md:px-20 space-y-3">
+          <div className="mt-10 xl:px-20 space-y-3">
             {faqs.map((f) => (
               <details
                 key={f.q}
@@ -307,12 +307,12 @@ export default async function LandingPage() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-10 md:py-16 md:px-20">
+        <section className="py-10 md:py-16 xl:px-20">
           <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#2355c1]/30 to-[#042469]/30 p-10 text-center backdrop-blur-xl sm:p-16">
-            <h2 className="font-vega text-4xl md:text-6xl font-bold">
+            <h2 className="font-vega text-4xl md:text-5xl lg:text-6xl font-bold">
               Your first quest is one goal away
             </h2>
-            <p className="font-sato mx-auto mt-4 font-extralight text-lg md:text-2xl text-slate-300">
+            <p className="font-sato mx-auto mt-4 font-extralight text-lg md:text-xl lg:text-2xl text-slate-300">
               Create an account, add a goal, and let Solo System draft the
               quests.
             </p>
@@ -335,7 +335,7 @@ export default async function LandingPage() {
         </section>
 
         {/* FOOTER */}
-        <footer className="font-sato flex flex-wrap items-center justify-center md:justify-between gap-4 border-t border-white/10 py-8 text-sm md:text-lg text-slate-400">
+        <footer className="font-sato flex flex-wrap items-center justify-center md:justify-between gap-4 border-t border-white/10 py-8 text-sm md:text-base lg:text-lg text-slate-400">
           <p>Built by Thoufiq. Inspired by Solo Leveling.</p>
           <p>Solo System &copy; 2026. Level up your real life.</p>
         </footer>

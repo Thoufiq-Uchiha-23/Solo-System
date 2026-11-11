@@ -45,11 +45,11 @@ export default function Navbar() {
 
   return (
     <nav className="bg-[#042469]/10 fixed flex justify-between w-full top-0 z-50">
-      <div className="w-full mx-auto px-5 py-4 lg:px-20 lg:py-7 flex items-center justify-between">
+      <div className="w-full mx-auto px-5 py-4 lg:px-20 lg:py-7 flex items-center justify-between backdrop-blur-xl">
         {/* Logo */}
         <Link
           href="/dashboard"
-          className="text-2xl md:text-4xl font-extralight font-solo bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent hover:from-[#376cdf] hover:to-[#0740b9] transition-all"
+          className="text-2xl md:text-3xl lg:text-4xl font-extralight font-solo bg-gradient-to-r from-[#2355c1] to-[#042469] bg-clip-text text-transparent hover:from-[#376cdf] hover:to-[#0740b9] transition-all"
         >
           Solo System
         </Link>
@@ -70,13 +70,13 @@ export default function Navbar() {
                     <Link
                       key={href}
                       href={href}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-t-3xl rounded-bl-3xl rounded-br-lg transition-all duration-200 font-aeo text-xl font-medium ${
+                      className={`flex items-center gap-1 px-3 py-1 rounded-t-3xl rounded-bl-3xl rounded-br-lg transition-all duration-200 font-aeo text-base lg:text-xl font-medium ${
                         active
                           ? "bg-white/10 text-white border-[0.3px] border-white/3"
                           : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
                       }`}
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-4 h-4 lg:w-6 lg:h-6" />
                       <p>{label}</p>
                     </Link>
                   );
@@ -84,17 +84,17 @@ export default function Navbar() {
               </div>
 
               <div className="hidden md:block text-right font-aeo">
-                <div className="font-medium text-white text-2xl">
+                <div className="font-medium text-white text-xl lg:text-2xl">
                   {session.user.name || session.user.email}
                 </div>
               </div>
 
               <button
                 onClick={() => signOut({ callbackUrl: "/login" })}
-                className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-3xl transition-all"
+                className="flex items-center gap-2 px-4 py-2 font-aeo text-slate-300 hover:text-white hover:bg-slate-800 rounded-3xl transition-all"
               >
                 <LogOut className="w-4 h-4" />
-                <span className="hidden md:inline font-medium text-xl">
+                <span className="hidden md:inline font-medium text-base lg:text-xl">
                   Log out
                 </span>
               </button>
@@ -156,27 +156,28 @@ export default function Navbar() {
             </div>
           )}
         </div>
-
-        {status === "authenticated" && session?.user && (
-          <div className="md:hidden fixed bottom-0 inset-x-0 z-50 flex justify-around py-1 bg-[#042469]/10 backdrop-blur-xl border-t border-white/10 font-aeo">
-            {NAV_LINKS.map(({ href, label, icon: Icon }) => {
-              const active = isActive(href);
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`flex flex-col items-center gap-0.5 px-4 py-1 text-xs font-medium transition-colors ${
-                    active ? "text-white" : "text-slate-400"
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span className="">{label}</span>
-                </Link>
-              );
-            })}
-          </div>
-        )}
       </div>
+
+      {/* Mobile bottom navigation */}
+      {status === "authenticated" && session?.user && (
+        <div className="md:hidden fixed bottom-0 inset-x-0 z-50 flex justify-around py-1 bg-[#042469]/10 backdrop-blur-xl border-t border-white/10 font-aeo">
+          {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+            const active = isActive(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`flex flex-col items-center gap-0.5 px-4 py-1 text-xs font-medium transition-colors ${
+                  active ? "text-white" : "text-slate-400"
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                <span className="">{label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </nav>
   );
 }
